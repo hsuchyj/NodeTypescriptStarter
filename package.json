@@ -4,8 +4,11 @@
   "description": "",
   "main": "dist/server.js",
   "dependencies": {
+    "@types/mongoose": "^5.5.21",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.3.2",
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.1",

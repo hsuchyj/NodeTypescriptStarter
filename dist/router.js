@@ -1,21 +1,21 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const controller_1 = require("./controller");
-class ApiRouter {
-    constructor() {
-        this.router = express_1.default.Router();
+exports.__esModule = true;
+var express = require("express");
+var controller_1 = require("./controller");
+var ApiRouter = /** @class */ (function () {
+    function ApiRouter() {
+        this.router = express.Router();
         this.controller = new controller_1.Controller();
     }
     // Creates the routes for this router and returns a populated router object
-    getRouter() {
+    ApiRouter.prototype.getRouter = function () {
+        this.controller.setupDb();
+        //go to http://localhost:3000/api/newUser to add a user to the db
+        this.router.get("/newUser", this.controller.create);
         this.router.get("/hello", this.controller.getHello);
-        this.router.post("/hello", this.controller.postHello);
+        this.router.post("/hello", this.controller.postJello);
         return this.router;
-    }
-}
+    };
+    return ApiRouter;
+}());
 exports.ApiRouter = ApiRouter;
-//# sourceMappingURL=router.js.map

@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import {Controller} from "./controller";
 
 export class ApiRouter {
@@ -7,8 +7,13 @@ export class ApiRouter {
 
     // Creates the routes for this router and returns a populated router object
     public getRouter(): express.Router {
+
+        this.controller.setupDb();
+        //go to http://localhost:3000/api/newUser to add a user to the db
+        this.router.get("/newUser", this.controller.create);
+
         this.router.get("/hello", this.controller.getHello);
-        this.router.post("/hello", this.controller.postHello);
+        this.router.post("/hello", this.controller.postJello);
         return this.router;
     }
 }
