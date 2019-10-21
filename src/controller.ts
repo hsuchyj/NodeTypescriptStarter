@@ -12,7 +12,7 @@ export class Controller {
 
     public setupDb() : void {
         //username:password
-        var mongoDb = 'mongodb+srv://everyone:cisc474@cisc474-ehxde.azure.mongodb.net/test?retryWrites=true&w=majority';
+        var mongoDb = 'mongodb+srv://everyone:cisc474@cluster0-ehxde.mongodb.net/test?retryWrites=true&w=majority';
         mongoose.connect(mongoDb, 
             {useNewUrlParser: true,
             useUnifiedTopology: true});
@@ -25,15 +25,16 @@ export class Controller {
     {
         var userSchema = new mongoose.Schema({
             username: String,
-            password:String
+            password:  String
           });
         
         var User = mongoose.model('User', userSchema);
         
-        var newUser = new User({ username: 'test',password:"password"});
+        var rand = Math.floor(Math.random() * 240) + 80;
+        var newUser = new User({ username: 'test'+rand,password:"password"});
        
         newUser.save();
-
+        
         console.log("something");
     }
 }
