@@ -17,8 +17,13 @@ class ApiRouter {
     // Creates the routes for this router and returns a populated router object
     getRouter() {
         this.controller.setupDb();
+<<<<<<< Updated upstream
         //go to http://localhost:3000/api/newUser to add a user to the db
         this.router.get("/newUser", this.controller.createUser);
+=======
+        // go to http://localhost:3000/api/newUser to add a user to the db
+        this.router.post("/user", this.controller.create);
+>>>>>>> Stashed changes
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

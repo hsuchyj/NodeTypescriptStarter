@@ -14,15 +14,15 @@ export class Controller {
         res.send(req.body);
     }
 
-    public setupDb() : void {
-        //username:password
-        var mongoDb = 'mongodb+srv://everyone:cisc474@cluster0-ehxde.mongodb.net/test?retryWrites=true&w=majority';
-        mongoose.connect(mongoDb, 
+    public setupDb(): void {
+        // username:password
+        const mongoDb = "mongodb+srv://everyone:cisc474@cluster0-ehxde.mongodb.net/test?retryWrites=true&w=majority";
+        mongoose.connect(mongoDb,
             {useNewUrlParser: true,
             useUnifiedTopology: true});
 
-        var db = mongoose.connection;
-        db.on('error', console.error.bind(console, 'MongoDB Connection error'));
+        const db = mongoose.connection;
+        db.on("error", console.error.bind(console, "MongoDB Connection error"));
     }
 
     public createUser(req: express.Request, res: express.Response): void
