@@ -1,8 +1,12 @@
 import * as express from "express";
-import * as mongoose from "mongoose";
-
+import mongoose , {Schema,Document} from "mongoose";
+//import {model}
+//const User = require("../src/model.ts");
+import User, { IUser } from "../model";
 
 export class Controller {
+
+    
     public getHello(req: express.Request, res: express.Response): void {
         res.send("Hello World");
     }
@@ -21,17 +25,11 @@ export class Controller {
         db.on('error', console.error.bind(console, 'MongoDB Connection error'));
     }
 
-    public create(): void
+    public createUser(req: express.Request, res: express.Response): void
     {
-        var userSchema = new mongoose.Schema({
-            username: String,
-            password:  String
-          });
-        
-        var User = mongoose.model('User', userSchema);
-        
+        console.log(req.body);
         var rand = Math.floor(Math.random() * 240) + 80;
-        var newUser = new User({ username: 'test'+rand,password:"password"});
+        const newUser: IUser = new User({ username: 'test'+rand,password:"password"});
        
         newUser.save();
         

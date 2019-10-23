@@ -1,34 +1,34 @@
 "use strict";
-exports.__esModule = true;
-var mongoose = require("mongoose");
-var Controller = /** @class */ (function () {
-    function Controller() {
-    }
-    Controller.prototype.getHello = function (req, res) {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+//import {model}
+//const User = require("../src/model.ts");
+const model_1 = __importDefault(require("../model"));
+class Controller {
+    getHello(req, res) {
         res.send("Hello World");
-    };
-    Controller.prototype.postJello = function (req, res) {
+    }
+    postJello(req, res) {
         res.send(req.body);
-    };
-    Controller.prototype.setupDb = function () {
+    }
+    setupDb() {
         //username:password
         var mongoDb = 'mongodb+srv://everyone:cisc474@cluster0-ehxde.mongodb.net/test?retryWrites=true&w=majority';
-        mongoose.connect(mongoDb, { useNewUrlParser: true,
+        mongoose_1.default.connect(mongoDb, { useNewUrlParser: true,
             useUnifiedTopology: true });
-        var db = mongoose.connection;
+        var db = mongoose_1.default.connection;
         db.on('error', console.error.bind(console, 'MongoDB Connection error'));
-    };
-    Controller.prototype.create = function () {
-        var userSchema = new mongoose.Schema({
-            username: String,
-            password: String
-        });
-        var User = mongoose.model('User', userSchema);
+    }
+    createUser(req, res) {
+        console.log(req.body);
         var rand = Math.floor(Math.random() * 240) + 80;
-        var newUser = new User({ username: 'test' + rand, password: "password" });
+        const newUser = new model_1.default({ username: 'test' + rand, password: "password" });
         newUser.save();
         console.log("something");
-    };
-    return Controller;
-}());
+    }
+}
 exports.Controller = Controller;
+//# sourceMappingURL=controller.js.map
