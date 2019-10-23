@@ -9,8 +9,15 @@ export class ApiRouter {
     public getRouter(): express.Router {
 
         this.controller.setupDb();
-        //go to http://localhost:3000/api/newUser to add a user to the db
+        // go to http://localhost:3000/api/newUser to add a user to the db
         this.router.post("/newUser", this.controller.createUser);
+
+        // restaurant endpoints
+        this.router.post("/restaurant", this.controller.createRestaurant);
+        this.router.get("/restaurant", this.controller.getRestaurant);
+        this.router.delete("/restaurant", this.controller.deleteRestaurant);
+        this.router.put("/restaurant", this.controller.updateRestaurant);
+
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

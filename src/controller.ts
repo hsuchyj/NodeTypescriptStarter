@@ -1,7 +1,7 @@
 import * as express from "express";
-import mongoose , {Schema,Document} from "mongoose";
-//import {model}
-//const User = require("../src/model.ts");
+import mongoose , {Document, Schema} from "mongoose";
+// import {model}
+// const User = require("../src/model.ts");
 import User, { IUser } from "./model";
 
 export class Controller {
@@ -24,9 +24,8 @@ export class Controller {
         db.on("error", console.error.bind(console, "MongoDB Connection error"));
     }
 
-    public createUser(req: express.Request, res: express.Response): void
-    {
-        //console.log(req.body.user);
+    public createUser(req: express.Request, res: express.Response): void {
+        // console.log(req.body.user);
         /*
         {
             "user":"whatever"
@@ -34,7 +33,24 @@ export class Controller {
         }
         */
         res.send("new user created");
-        const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
+        const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
         newUser.save();
     }
+
+    public getRestaurant(req: express.Request, res: express.Response): void {
+        res.send("GET");
+    }
+
+    public updateRestaurant(req: express.Request, res: express.Response): void {
+        res.send("PUT");
+    }
+
+    public deleteRestaurant(req: express.Request, res: express.Response): void {
+        res.send("DELETE");
+    }
+
+    public createRestaurant(req: express.Request, res: express.Response): void {
+        res.send("POST");
+    }
+
 }
