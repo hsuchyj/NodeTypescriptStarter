@@ -2,7 +2,7 @@ import * as express from "express";
 import mongoose , {Schema,Document} from "mongoose";
 //import {model}
 //const User = require("../src/model.ts");
-import User, { IUser } from "../model";
+import User, { IUser } from "./model";
 
 export class Controller {
 
