@@ -7,6 +7,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 <<<<<<< Updated upstream
 //import {model}
 //const User = require("../src/model.ts");
+<<<<<<< HEAD
 const model_1 = __importDefault(require("../model"));
 =======
 const userSchema = new mongoose_1.default.Schema({
@@ -15,6 +16,9 @@ const userSchema = new mongoose_1.default.Schema({
 });
 const User = mongoose_1.default.model("User", userSchema);
 >>>>>>> Stashed changes
+=======
+const model_1 = __importDefault(require("./model"));
+>>>>>>> Hunter
 class Controller {
     getHello(req, res) {
         res.send("Hello World");
@@ -32,10 +36,17 @@ class Controller {
         db.on('error', console.error.bind(console, 'MongoDB Connection error'));
     }
     createUser(req, res) {
-        console.log(req.body);
-        var rand = Math.floor(Math.random() * 240) + 80;
-        const newUser = new model_1.default({ username: 'test' + rand, password: "password" });
+        //console.log(req.body.user);
+        /*
+        {
+            "user":"whatever"
+            "password":"okiedokie"
+        }
+        */
+        res.send("new user created");
+        const newUser = new model_1.default({ username: req.body.user, password: req.body.password });
         newUser.save();
+<<<<<<< HEAD
         console.log("something");
 =======
         // username:password
@@ -60,6 +71,8 @@ class Controller {
         // newUser.save();
         res.send(req.body);
 >>>>>>> Stashed changes
+=======
+>>>>>>> Hunter
     }
 }
 exports.Controller = Controller;
