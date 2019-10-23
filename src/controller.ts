@@ -26,10 +26,11 @@ export class Controller {
 
     public createUser(req: express.Request, res: express.Response): void
     {
-        //console.log(req.body.user);
+        //console.log(req.body);
         /*
+        ^^^^^^^
         {
-            "user":"whatever"
+            "user":"whatever",
             "password":"okiedokie"
         }
         */
@@ -37,4 +38,21 @@ export class Controller {
         const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
         newUser.save();
     }
+
+    public readUser(req: express.Request, res: express.Response): void
+    {
+        //console.log(req.body);
+        /*
+        ^^^^^^^
+        {
+            "user":"whatever",
+            "password":"okiedokie"
+        }
+        */
+        res.send("new user created");
+        const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
+        newUser.save(); 
+    }
+
+    
 }

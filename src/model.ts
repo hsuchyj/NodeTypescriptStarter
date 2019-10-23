@@ -10,4 +10,4 @@ const UserSchema: Schema = new Schema({
     password: String
   });
 
-export default mongoose.model<IUser>('User', UserSchema);
+export default mongoose.model<IUser>('User', UserSchema, "users");

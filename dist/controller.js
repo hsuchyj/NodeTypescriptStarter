@@ -23,10 +23,11 @@ class Controller {
         db.on('error', console.error.bind(console, 'MongoDB Connection error'));
     }
     createUser(req, res) {
-        //console.log(req.body.user);
+        //console.log(req.body);
         /*
+        ^^^^^^^
         {
-            "user":"whatever"
+            "user":"whatever",
             "password":"okiedokie"
         }
         */

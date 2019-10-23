@@ -12,5 +12,5 @@ const UserSchema = new mongoose_1.Schema({
     username: String,
     password: String
 });
-exports.default = mongoose_1.default.model('User', UserSchema);
+exports.default = mongoose_1.default.model('User', UserSchema, "food");
 //# sourceMappingURL=model.js.map
