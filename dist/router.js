@@ -18,7 +18,7 @@ class ApiRouter {
     getRouter() {
         this.controller.setupDb();
         //go to http://localhost:3000/api/newUser to add a user to the db
-        this.router.get("/newUser", this.controller.createUser);
+        this.router.post("/newUser", this.controller.createUser);
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

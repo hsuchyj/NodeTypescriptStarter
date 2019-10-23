@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 //import {model}
 //const User = require("../src/model.ts");
-const model_1 = __importDefault(require("../model"));
+const model_1 = __importDefault(require("./model"));
 class Controller {
     getHello(req, res) {
         res.send("Hello World");
@@ -23,11 +23,16 @@ class Controller {
         db.on('error', console.error.bind(console, 'MongoDB Connection error'));
     }
     createUser(req, res) {
-        console.log(req.body);
-        var rand = Math.floor(Math.random() * 240) + 80;
-        const newUser = new model_1.default({ username: 'test' + rand, password: "password" });
+        //console.log(req.body.user);
+        /*
+        {
+            "user":"whatever"
+            "password":"okiedokie"
+        }
+        */
+        res.send("new user created");
+        const newUser = new model_1.default({ username: req.body.user, password: req.body.password });
         newUser.save();
-        console.log("something");
     }
 }
 exports.Controller = Controller;

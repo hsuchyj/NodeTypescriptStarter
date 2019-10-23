@@ -2,10 +2,9 @@ import * as express from "express";
 import mongoose , {Schema,Document} from "mongoose";
 //import {model}
 //const User = require("../src/model.ts");
-import User, { IUser } from "../model";
+import User, { IUser } from "./model";
 
 export class Controller {
-
     
     public getHello(req: express.Request, res: express.Response): void {
         res.send("Hello World");
@@ -27,12 +26,15 @@ export class Controller {
 
     public createUser(req: express.Request, res: express.Response): void
     {
-        console.log(req.body);
-        var rand = Math.floor(Math.random() * 240) + 80;
-        const newUser: IUser = new User({ username: 'test'+rand,password:"password"});
-       
+        //console.log(req.body.user);
+        /*
+        {
+            "user":"whatever"
+            "password":"okiedokie"
+        }
+        */
+        res.send("new user created");
+        const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
         newUser.save();
-        
-        console.log("something");
     }
 }
