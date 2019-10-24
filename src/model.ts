@@ -5,8 +5,8 @@ export interface IUser extends Document {
     username: string;
     password: string;
     email: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     about: string;
 }
 
@@ -37,13 +37,13 @@ const UserSchema: Schema = new Schema({
       trim: true
     },
 
-    firstname: {
+    firstName: {
       type: String,
       required: "You must enter a First Name to register",
       trim: true
     },
 
-    lastname: {
+    lastName: {
       type: String,
       required: "You must enter a Last Name to register",
       trim: true
@@ -51,15 +51,55 @@ const UserSchema: Schema = new Schema({
 
     about: { // About Me profile section
       type: String,
-      maxlength: [255, "About Me section is limited to 255 characters"],
+      maxlength: [255, "About Me section is limited to 255 characters"]
     }
   });
 
 const RestaurantSchema: Schema = new Schema({
-  // TODO
+  name: {
+    type: String,
+    required: "You must enter a Restaurant Name to create a restaurant",
+    unique: true, // NOTE: WE MUST IMPLEMENT LOGIC TO ENSURE THIS IS MAINTAINED MANUALLY
+  },
+
+  city: {
+    type: String,
+    required: "You must enter a City to create a restaurant",
+    trim: true
+  },
+
+  state: {
+    type: String,
+    required: "You must enter a State to create a restaurant",
+    trim: true
+  },
+
+  // Address does NOT have a required field because all we really need to do sorting by location is City and State
+  address: { 
+    type: String,
+    match: [/^\s*\S+(?:\s+\S+){2}/, "Please enter a valid Street Address"] // REGEX to test validity
+  },
+
+  website: {
+    type: String,
+    match: [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi, "Please enter a valid Web Address"] // REGEX to test validity
+  },
+
+  description: {
+    type: String,
+    maxlength: [255, "Restaurant description section is limited to 255 characters"],
+  },
+
+  createdBy: {
+    
+  }
 });
 
 const ReviewSchema: Schema = new Schema ({
+  // TODO
+});
+
+const MenuSchema: Schema = new Schema ({
   // TODO
 });
 
