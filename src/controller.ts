@@ -24,17 +24,34 @@ export class Controller {
         db.on("error", console.error.bind(console, "MongoDB Connection error"));
     }
 
+
     public createUser(req: express.Request, res: express.Response): void {
         // console.log(req.body.user);
         /*
+        ^^^^^^^
         {
-            "user":"whatever"
+            "user":"whatever",
             "password":"okiedokie"
         }
         */
         res.send("new user created");
         const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
         newUser.save();
+    }
+    
+    public readUser(req: express.Request, res: express.Response): void
+    {
+        //console.log(req.body);
+        /*
+        ^^^^^^^
+        {
+            "user":"whatever",
+            "password":"okiedokie"
+        }
+        */
+        res.send("new user created");
+        const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
+        newUser.save(); 
     }
 
     public getRestaurant(req: express.Request, res: express.Response): void {
@@ -52,5 +69,4 @@ export class Controller {
     public createRestaurant(req: express.Request, res: express.Response): void {
         res.send("POST");
     }
-
 }

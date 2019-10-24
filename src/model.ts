@@ -10,8 +10,7 @@ const UserSchema: Schema = new Schema({
     password: String
   });
 
+export default mongoose.model<IUser>('User', UserSchema, "users");
 const RestaurantSchema: Schema = new Schema({
   //TODO
 });
-
-export default mongoose.model<IUser>("User", UserSchema);
