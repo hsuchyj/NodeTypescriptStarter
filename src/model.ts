@@ -8,8 +8,9 @@ export interface IUser extends Document {
     firstname: string;
     lastname: string;
     about: string;
-  }
+}
 
+// Insert Schema definitions here
 const UserSchema: Schema = new Schema({
     username: {
       type: String, 
