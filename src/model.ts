@@ -2,12 +2,22 @@ import mongoose, { Document, Schema } from "mongoose";
 
 // Insert interface exports here
 export interface IUser extends Document {
-    username: string;
-    password: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    about: string;
+  username: string;
+  password: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  about: string;
+}
+
+export interface IRestaurant extends Document {
+  name: string;
+  city: string;
+  state: string;
+  address: string;
+  website: string;
+  description: string;
+  createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
 }
 
 // Insert Schema definitions here
@@ -55,6 +65,7 @@ const UserSchema: Schema = new Schema({
     }
   });
 
+  // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
 const RestaurantSchema: Schema = new Schema({
   name: {
     type: String,
@@ -90,8 +101,11 @@ const RestaurantSchema: Schema = new Schema({
     maxlength: [255, "Restaurant description section is limited to 255 characters"],
   },
 
+  // This essentially allows us to nest a user object from the collection USER as the data for this field
+  // We will need to use the .populate method to fill this field dynamically when we implement CRUD methods
   createdBy: {
-    
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }
 });
 
@@ -103,4 +117,13 @@ const MenuSchema: Schema = new Schema ({
   // TODO
 });
 
+// Export Schema (Unsure if this is wholly correct)
+module.exports = {
+  User: UserSchema,
+  Restaurant: RestaurantSchema
+};
+
+/*
 export default mongoose.model<IUser>("User", UserSchema);
+export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);
+*/
