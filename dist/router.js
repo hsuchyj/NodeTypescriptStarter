@@ -20,6 +20,12 @@ class ApiRouter {
         //go to http://localhost:3000/api/users to add a user to the db
         this.router.post("/users", this.controller.createUser);
         this.router.get("/users/:id", this.controller.createUser);
+        //go to http://localhost:3000/api/newUser to add a user to the db
+        this.router.get("/newUser", this.controller.createUser);
+        // go to http://localhost:3000/api/newUser to add a user to the db
+        this.router.post("/user", this.controller.create);
+
+        this.router.post("/newUser", this.controller.createUser);
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

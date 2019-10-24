@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
     username: string;
@@ -11,3 +11,6 @@ const UserSchema: Schema = new Schema({
   });
 
 export default mongoose.model<IUser>('User', UserSchema, "users");
+const RestaurantSchema: Schema = new Schema({
+  //TODO
+});
