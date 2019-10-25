@@ -12,5 +12,9 @@ const UserSchema = new mongoose_1.Schema({
     username: String,
     password: String
 });
+<<<<<<< Updated upstream
 exports.default = mongoose_1.default.model('User', UserSchema, "food");
+=======
+exports.default = mongoose_1.default.model("User", UserSchema);
+>>>>>>> Stashed changes
 //# sourceMappingURL=model.js.map
