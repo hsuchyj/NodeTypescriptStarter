@@ -55,7 +55,10 @@ export class Controller {
     }
 
     public getRestaurant(req: express.Request, res: express.Response): void {
-        res.send("GET");
+        Restaurant.findById( req.url.split("/")[2], (err, result) => {
+            res.send(result);
+            console.log(err);
+        });
     }
 
     public updateRestaurant(req: express.Request, res: express.Response): void {
@@ -67,8 +70,7 @@ export class Controller {
     }
 
     public createRestaurant(req: express.Request, res: express.Response): void {
-        // res.send("POST");
-        const newRestaurant: IRestaurant = new Restaurant({ 
+        const newRestaurant: IRestaurant = new Restaurant({
             name: req.body.name,
             city: req.body.city,
             state: req.body.state,
@@ -76,7 +78,10 @@ export class Controller {
             website: req.body.website,
             description: req.body.description
         });
-        newRestaurant.save();
-        res.send(req.body);
+        newRestaurant.save((err, product) => {
+            res.send(product._id);
+            console.log(err);
+        });
     }
+
 }

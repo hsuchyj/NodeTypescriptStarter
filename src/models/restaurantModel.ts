@@ -12,6 +12,7 @@ export interface IRestaurant extends Document {
 
     // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
 const RestaurantSchema: Schema = new Schema({
+
     name: {
       type: String,
       required: "You must enter a Restaurant Name to create a restaurant",
@@ -52,7 +53,7 @@ const RestaurantSchema: Schema = new Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: "User"
     }
-   }
-  );
+   }, {collection: "restaurants"}
+   );
 
 export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);
