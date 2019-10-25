@@ -30,7 +30,8 @@ export class Controller {
     public createUser(req: express.Request, res: express.Response): void {
         // console.log(req.body.user);
         /*
-        ^^^^^^^
+        this is the body to be submitted
+
         {
             "user":"whatever",
             "password":"okiedokie"
@@ -63,6 +64,21 @@ export class Controller {
          })*/
     }
 
+    public updateUser(req: express.Request, res: express.Response): void 
+    {
+        User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, model) 
+        {
+            res.send("User has been updated");
+        });
+    }
+
+    public deleteUser(req: express.Request, res: express.Response): void 
+    {
+        User.findByIdAndDelete(req.params.id, function(err, model)
+        {
+            res.send("User deleted");
+        });
+    }
 
     public getRestaurant(req: express.Request, res: express.Response): void {
         res.send("GET");

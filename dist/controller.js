@@ -27,7 +27,8 @@ class Controller {
     createUser(req, res) {
         // console.log(req.body.user);
         /*
-        ^^^^^^^
+        this is the body to be submitted
+
         {
             "user":"whatever",
             "password":"okiedokie"
@@ -53,6 +54,16 @@ class Controller {
         result.then(function(result2) {
             console.log(result2) // "Some User token"
          })*/
+    }
+    updateUser(req, res) {
+        userModel_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, model) {
+            res.send("User has been updated");
+        });
+    }
+    deleteUser(req, res) {
+        userModel_1.default.findByIdAndDelete(req.params.id, function (err, model) {
+            res.send("User deleted");
+        });
     }
     getRestaurant(req, res) {
         res.send("GET");
