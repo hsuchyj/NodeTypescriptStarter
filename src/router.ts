@@ -9,7 +9,7 @@ export class ApiRouter {
     public getRouter(): express.Router {
 
         this.controller.setupDb();
-        //go to http://localhost:3000/api/users to add a user to the db
+        // go to http://localhost:3000/api/users to add a user to the db
         this.router.post("/users", this.controller.createUser);
         this.router.get("/users/:id", this.controller.createUser);
 

@@ -2,7 +2,8 @@ import * as express from "express";
 import mongoose , {Document, Schema} from "mongoose";
 // import {model}
 // const User = require("../src/model.ts");
-import User, { IUser } from "./model";
+import User, { IUser } from "./models/userModel";
+import Restaurant, { IRestaurant } from "./models/restaurantModel";
 
 export class Controller {
     
@@ -24,7 +25,7 @@ export class Controller {
         db.on("error", console.error.bind(console, "MongoDB Connection error"));
     }
 
-
+    // TODO update the User to the new schema
     public createUser(req: express.Request, res: express.Response): void {
         // console.log(req.body.user);
         /*
@@ -39,9 +40,8 @@ export class Controller {
         newUser.save();
     }
     
-    public readUser(req: express.Request, res: express.Response): void
-    {
-        //console.log(req.body);
+    public readUser(req: express.Request, res: express.Response): void {
+        // console.log(req.body);
         /*
         ^^^^^^^
         {
@@ -50,7 +50,7 @@ export class Controller {
         }
         */
         res.send("new user created");
-        const newUser: IUser = new User({ username: req.body.user,password:req.body.password});
+        const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
         newUser.save(); 
     }
 
@@ -67,6 +67,16 @@ export class Controller {
     }
 
     public createRestaurant(req: express.Request, res: express.Response): void {
-        res.send("POST");
+        // res.send("POST");
+        const newRestaurant: IRestaurant = new Restaurant({ 
+            name: req.body.name,
+            city: req.body.city,
+            state: req.body.state,
+            address: req.body.address,
+            website: req.body.website,
+            description: req.body.description
+        });
+        newRestaurant.save();
+        res.send(req.body);
     }
 }
