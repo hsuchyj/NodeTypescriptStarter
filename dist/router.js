@@ -17,25 +17,16 @@ class ApiRouter {
     // Creates the routes for this router and returns a populated router object
     getRouter() {
         this.controller.setupDb();
-<<<<<<< Updated upstream
-        //go to http://localhost:3000/api/users to add a user to the db
+        // go to http://localhost:3000/api/users to add a user to the db
         this.router.post("/users", this.controller.createUser);
-        this.router.get("/users/:id", this.controller.createUser);
-        //go to http://localhost:3000/api/newUser to add a user to the db
-        this.router.get("/newUser", this.controller.createUser);
+        this.router.get("/users/:id", this.controller.readUser);
         // go to http://localhost:3000/api/newUser to add a user to the db
-        this.router.post("/user", this.controller.create);
-
-        this.router.post("/newUser", this.controller.createUser);
-=======
-        // go to http://localhost:3000/api/newUser to add a user to the db
-        this.router.post("/newUser", this.controller.createUser);
+        //this.router.post("/newUser", this.controller.createUser);
         // restaurant endpoints
         this.router.post("/restaurant", this.controller.createRestaurant);
         this.router.get("/restaurant", this.controller.getRestaurant);
         this.router.delete("/restaurant", this.controller.deleteRestaurant);
         this.router.put("/restaurant", this.controller.updateRestaurant);
->>>>>>> Stashed changes
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

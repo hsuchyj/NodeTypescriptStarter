@@ -11,10 +11,10 @@ export class ApiRouter {
         this.controller.setupDb();
         // go to http://localhost:3000/api/users to add a user to the db
         this.router.post("/users", this.controller.createUser);
-        this.router.get("/users/:id", this.controller.createUser);
+        this.router.get("/users/:id", this.controller.readUser);
 
         // go to http://localhost:3000/api/newUser to add a user to the db
-        this.router.post("/newUser", this.controller.createUser);
+        //this.router.post("/newUser", this.controller.createUser);
 
         // restaurant endpoints
         this.router.post("/restaurant", this.controller.createRestaurant);

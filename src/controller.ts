@@ -4,6 +4,7 @@ import mongoose , {Document, Schema} from "mongoose";
 // const User = require("../src/model.ts");
 import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
+import { ObjectId } from "mongodb";
 
 export class Controller {
     
@@ -41,18 +42,27 @@ export class Controller {
     }
     
     public readUser(req: express.Request, res: express.Response): void {
-        // console.log(req.body);
+        //if entry exists returns it as json
+        User.findById(req.params.id, "username password", { lean: true }, 
+            function (err, doc) 
+            {
+                if(doc == null)
+                {
+                    res.send("User does not exist");
+                }
+                else
+                    res.json(doc);
+            });
+
         /*
-        ^^^^^^^
-        {
-            "user":"whatever",
-            "password":"okiedokie"
-        }
-        */
-        res.send("new user created");
-        const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
-        newUser.save(); 
+        check if entry exists
+
+        const result = User.exists({username:"rick and morty"});
+        result.then(function(result2) {
+            console.log(result2) // "Some User token"
+         })*/
     }
+
 
     public getRestaurant(req: express.Request, res: express.Response): void {
         res.send("GET");
