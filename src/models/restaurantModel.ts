@@ -8,6 +8,7 @@ export interface IRestaurant extends Document {
     website: string;
     description: string;
     createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
+    reviews: [mongoose.Schema.Types.ObjectId]; // An array of 0 or more reviews
   }
 
     // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
@@ -51,6 +52,12 @@ const RestaurantSchema: Schema = new Schema({
      createdBy: {
        type: mongoose.Schema.Types.ObjectId,
        ref: "User"
+    },
+
+    // Array of 0 or more reviews
+    reviews: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User" // Not sure if we should be using User as the table for reviews 
     }
    }
   );
