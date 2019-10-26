@@ -9,4 +9,4 @@ const MenuSchema: Schema = new Schema ({
     // TODO
 });
 
-export default mongoose.model<IMenu>("User", MenuSchema);
+export default mongoose.model<IMenu>("Restaurant", MenuSchema);
