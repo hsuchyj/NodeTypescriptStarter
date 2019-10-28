@@ -4,7 +4,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IReview extends Document {
     restaurant: mongoose.Schema.Types.ObjectId;
     creator: mongoose.Schema.Types.ObjectId;
-    contents: string;
+    text: string;
     rating: number;
 }
 
@@ -19,10 +19,11 @@ const ReviewSchema: Schema = new Schema ({
         ref: "User"
     },
 
-    contents: {
+    text: {
         type: String,
         maxlength: [255, "Reviews are limited in size to 255 characters"],
-        required: "You must provide a review"
+        required: "You must provide a review",
+        ref: "Text"
     },
 
     rating: {

@@ -133,4 +133,20 @@ export class Controller {
         });
     }
 
+    public createReview(req: express.Request, res: express.Response): void {
+        res.send("POST");
+    }
+
+    public getReview(req: express.Request, res: express.Response): void {
+        res.send("GET");
+    }
+
+    public deleteReview(req: express.Request, res: express.Response): void {
+        res.send("DELETE");
+    }
+
+    public updateReview(req: express.Request, res: express.Response): void {
+        res.send("PUT");
+    }
+
 }

@@ -25,6 +25,12 @@ export class ApiRouter {
         this.router.delete("/restaurant/:id", this.controller.deleteRestaurant);
         this.router.put("/restaurant/:id", this.controller.updateRestaurant);
 
+        // review endpoints
+        this.router.post("/reviews/:id", this.controller.createReview); // restaurant id
+        this.router.get("/reviews/:id", this.controller.getReview);  // restaurant id
+        this.router.delete("/reviews/:id/:id", this.controller.deleteReview); // rest id, rev id
+        this.router.put("/reviews/:id/:id", this.controller.updateReview); // rest id, rev id
+
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;
