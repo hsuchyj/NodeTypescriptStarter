@@ -7,7 +7,7 @@ export interface IRestaurant extends Document {
     address: string;
     website: string;
     description: string;
-    createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
+    // createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
   }
 
     // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
@@ -16,7 +16,6 @@ const RestaurantSchema: Schema = new Schema({
     name: {
       type: String,
       required: "You must enter a Restaurant Name to create a restaurant",
-      unique: true, // NOTE: WE MUST IMPLEMENT LOGIC TO ENSURE THIS IS MAINTAINED MANUALLY
     },
   
     city: {
@@ -49,10 +48,10 @@ const RestaurantSchema: Schema = new Schema({
   
     // This essentially allows us to nest a user object from the collection USER as the data for this field
     // We will need to use the .populate method to fill this field dynamically when we implement CRUD methods
-     createdBy: {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: "User"
-    }
+     // createdBy: {
+     //  type: mongoose.Schema.Types.ObjectId,
+      // ref: "User"
+    // }
    }, {collection: "restaurants"}
    );
 
