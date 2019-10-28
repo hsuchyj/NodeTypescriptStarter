@@ -7,7 +7,8 @@ export interface IRestaurant extends Document {
     address: string;
     website: string;
     description: string;
-    // createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
+    createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
+    reviews: [mongoose.Schema.Types.ObjectId]; // An array of 0 or more reviews
   }
 
     // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
@@ -48,11 +49,17 @@ const RestaurantSchema: Schema = new Schema({
   
     // This essentially allows us to nest a user object from the collection USER as the data for this field
     // We will need to use the .populate method to fill this field dynamically when we implement CRUD methods
-     // createdBy: {
-     //  type: mongoose.Schema.Types.ObjectId,
-      // ref: "User"
-    // }
-   }, {collection: "restaurants"}
-   );
+     createdBy: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "User"
+    },
+
+    // Array of 0 or more reviews
+    reviews: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User" // Not sure if we should be using User as the table for reviews 
+    }
+   }
+  );
 
 export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);

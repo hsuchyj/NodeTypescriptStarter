@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 // import {model}
 // const User = require("../src/model.ts");
-const model_1 = __importDefault(require("./model"));
+const userModel_1 = __importDefault(require("./models/userModel"));
+const restaurantModel_1 = __importDefault(require("./models/restaurantModel"));
 class Controller {
     getHello(req, res) {
         res.send("Hello World");
@@ -22,22 +23,47 @@ class Controller {
         const db = mongoose_1.default.connection;
         db.on("error", console.error.bind(console, "MongoDB Connection error"));
     }
+    // TODO update the User to the new schema
     createUser(req, res) {
-<<<<<<< Updated upstream
-        //console.log(req.body);
-=======
         // console.log(req.body.user);
->>>>>>> Stashed changes
         /*
-        ^^^^^^^
+        this is the body to be submitted
+
         {
             "user":"whatever",
             "password":"okiedokie"
         }
         */
         res.send("new user created");
-        const newUser = new model_1.default({ username: req.body.user, password: req.body.password });
+        const newUser = new userModel_1.default({ username: req.body.user, password: req.body.password });
         newUser.save();
+    }
+    readUser(req, res) {
+        //if entry exists returns it as json
+        userModel_1.default.findById(req.params.id, "username password", { lean: true }, function (err, doc) {
+            if (doc == null) {
+                res.send("User does not exist");
+            }
+            else
+                res.json(doc);
+        });
+        /*
+        check if entry exists
+
+        const result = User.exists({username:"rick and morty"});
+        result.then(function(result2) {
+            console.log(result2) // "Some User token"
+         })*/
+    }
+    updateUser(req, res) {
+        userModel_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, model) {
+            res.send("User has been updated");
+        });
+    }
+    deleteUser(req, res) {
+        userModel_1.default.findByIdAndDelete(req.params.id, function (err, model) {
+            res.send("User deleted");
+        });
     }
     getRestaurant(req, res) {
         res.send("GET");
@@ -49,7 +75,17 @@ class Controller {
         res.send("DELETE");
     }
     createRestaurant(req, res) {
-        res.send("POST");
+        // res.send("POST");
+        const newRestaurant = new restaurantModel_1.default({
+            name: req.body.name,
+            city: req.body.city,
+            state: req.body.state,
+            address: req.body.address,
+            website: req.body.website,
+            description: req.body.description
+        });
+        newRestaurant.save();
+        res.send(req.body);
     }
 }
 exports.Controller = Controller;
