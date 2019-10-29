@@ -59,7 +59,6 @@ const RestaurantSchema: Schema = new Schema({
       type: [mongoose.Schema.Types.ObjectId],
       ref: "User" // Not sure if we should be using User as the table for reviews 
     }
-   }, {collection: "restaurants"}
-  );
+   });
 
-export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);
+export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema, "restaurants");

@@ -19,11 +19,11 @@ export class ApiRouter {
         // this.router.post("/newUser", this.controller.createUser);
 
         // restaurant endpoints
-        this.router.post("/restaurant", this.controller.createRestaurant);
-        this.router.get("/restaurant/:id", this.controller.getRestaurant);
-        this.router.get("/restaurant/all/all", this.controller.getAllRestaurants); // might change
-        this.router.delete("/restaurant/:id", this.controller.deleteRestaurant);
-        this.router.put("/restaurant/:id", this.controller.updateRestaurant);
+        this.router.post("/restaurants", this.controller.createRestaurant);
+        this.router.get("/restaurants/:id", this.controller.getRestaurant);
+        this.router.get("/restaurants/all/all", this.controller.getAllRestaurants); // might change
+        this.router.delete("/restaurants/:id", this.controller.deleteRestaurant);
+        this.router.put("/restaurants/:id", this.controller.updateRestaurant);
 
         // review endpoints
         this.router.post("/reviews/:id", this.controller.createReview); // restaurant id

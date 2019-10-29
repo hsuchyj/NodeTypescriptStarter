@@ -5,6 +5,7 @@ import mongoose , {Document, Schema} from "mongoose";
 import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
+import Review, { IReview } from "./models/reviewModel";
 
 export class Controller {
     
@@ -128,13 +129,27 @@ export class Controller {
             if (err) {
                 res.send(err);
             } else {
-                res.send(product);
+                res.send(product._id);
             }
         });
     }
 
     public createReview(req: express.Request, res: express.Response): void {
-        res.send("POST");
+        const newReview: IReview = new Review({
+            restaurantId: mongoose.Types.ObjectId(req.url.split("/")[2]),
+            creatorId: mongoose.Types.ObjectId(req.body.creator),
+            timestamp: null,
+            text: req.body.text,
+            ratings: req.body.ratings
+        });
+        newReview.save( (err, product) => {
+            if (err) {
+                res.send(err);
+            } else {
+                product.timestamp = product._id.getTimestamp();
+                res.send(product._id);
+            }
+        });
     }
 
     public getReview(req: express.Request, res: express.Response): void {
