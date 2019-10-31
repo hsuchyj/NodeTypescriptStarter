@@ -1,3 +1,4 @@
+/*
 import mongoose, { Document, Schema } from "mongoose";
 
 // tslint:disable-next-line: no-empty-interface
@@ -29,3 +30,4 @@ const MenuSchema: Schema = new Schema ({
 });
 
 export default mongoose.model<IMenu>("Restaurant", MenuSchema);
+*/
