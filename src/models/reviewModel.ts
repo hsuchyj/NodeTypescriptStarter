@@ -17,38 +17,6 @@ export interface IReview extends Document {
     };
 }
 
-/*
-const ReviewSchema: Schema = new Schema ({
-    restaurantId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Restaurant"
-    }, 
-
-    creatorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
-
-    timestamp: {
-        type: Date,
-        ref: "Timestamp"
-    },
-
-    text: {
-        type: String,
-        maxlength: [255, "Reviews are limited in size to 255 characters"],
-        required: "You must provide a review",
-        ref: "Text"
-    },
-
-    ratings: {
-        type: Object
-        // required: "You must provide a rating from 1 to 5"
-    }
-
-});
-*/
-
 const ReviewSchema: Schema = new Schema ({
     restaurantId: {
         type: mongoose.Schema.Types.ObjectId,

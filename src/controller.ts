@@ -189,7 +189,7 @@ export class Controller {
     }
 
     public deleteReview(req: express.Request, res: express.Response): void {
-        Review.update({restaurantId: req.url.split("/")[2]}, 
+        Review.update({restaurantId: new ObjectId(req.url.split("/")[2])}, 
             { $pull: { reviews: { creatorId: new ObjectId(req.url.split("/")[3]) }}},
             { multi: true }, 
             (err, raw) => {
@@ -202,9 +202,13 @@ export class Controller {
     }
 
     public updateReview(req: express.Request, res: express.Response): void {
-        Review.update({"restaurantId": req.url.split("/")[2],
+        Review.updateOne({"restaurantId": req.url.split("/")[2],
         "reviews.creatorId": new ObjectId(req.url.split("/")[3])}, 
-            {"reviews.$": req.body},
+            { $set: {
+                "reviews.$.text": req.body.text,
+                "reviews.$.ratings": req.body.ratings,
+                "reviews.$.timestamp": new Date()
+            }},
             (err, raw) => {
                 if (err) {
                     res.send(err);
