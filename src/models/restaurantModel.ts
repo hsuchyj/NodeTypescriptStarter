@@ -54,11 +54,6 @@ const RestaurantSchema: Schema = new Schema({
        ref: "User"
     },
 
-    // Array of 0 or more reviews
-    reviews: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "User" // Not sure if we should be using User as the table for reviews 
-    }
    });
 
 export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema, "restaurants");

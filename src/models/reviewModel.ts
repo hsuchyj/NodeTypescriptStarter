@@ -2,7 +2,6 @@ import mongoose, { Document, Schema } from "mongoose";
 
 // tslint:disable-next-line: no-empty-interface
 export interface IReview extends Document {
-    restaurantId: mongoose.Schema.Types.ObjectId;
     creatorId: mongoose.Schema.Types.ObjectId;
     timestamp: Date;
     text: string;
@@ -18,6 +17,7 @@ export interface IReview extends Document {
     };
 }
 
+/*
 const ReviewSchema: Schema = new Schema ({
     restaurantId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -46,6 +46,22 @@ const ReviewSchema: Schema = new Schema ({
         // required: "You must provide a rating from 1 to 5"
     }
 
+});
+*/
+
+const ReviewSchema: Schema = new Schema ({
+    restaurantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "RestaurantId"
+    },
+
+    name: {
+        type: String
+    },
+
+    reviews: {
+        type: Array
+    }
 });
 
 // Might want to have reviews in the restaurant collection

@@ -129,39 +129,89 @@ export class Controller {
             if (err) {
                 res.send(err);
             } else {
+                const newReview: IReview = new Review({
+                    reviews: [],
+                    name: req.body.name,
+                    restaurantId: mongoose.Types.ObjectId(product._id)
+                });
+                newReview.save();
                 res.send(product._id);
             }
         });
     }
 
     public createReview(req: express.Request, res: express.Response): void {
-        const newReview: IReview = new Review({
-            restaurantId: mongoose.Types.ObjectId(req.url.split("/")[2]),
-            creatorId: mongoose.Types.ObjectId(req.body.creator),
-            timestamp: null,
-            text: req.body.text,
-            ratings: req.body.ratings
-        });
-        newReview.save( (err, product) => {
+        Review.findOne({ restaurantId: req.url.split("/")[2] } , (error, result) => {
+            if (result) {
+                const newReview = {
+                    creatorId: mongoose.Types.ObjectId(req.body.creatorId),
+                    timestamp: new Date(),
+                    text: req.body.text,
+                    ratings: req.body.ratings
+                };
+
+                Review.findOneAndUpdate({restaurantId: req.url.split("/")[2]}, 
+                { $push: { reviews: newReview }}, (err, model) => {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.send("Review created");
+                    }
+                });
+            } else {
+                res.send("Restaurant does not exist");
+            }});
+    }
+
+    public getReview(req: express.Request, res: express.Response): void {
+        Review.findOne(
+            { "restaurantId": new ObjectId(req.url.split("/")[2]),
+                "reviews.creatorId": new ObjectId(req.url.split("/")[3]) }, 
+            { "reviews.$": 1 }, 
+            (err, result) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    console.log(result);
+                    res.send(result);
+                }
+            });
+    }
+
+    public getAllReviews(req: express.Request, res: express.Response): void {
+        Review.findOne({restaurantId: new ObjectId(req.url.split("/")[2])}, (err, result) => {
             if (err) {
                 res.send(err);
             } else {
-                product.timestamp = product._id.getTimestamp();
-                res.send(product._id);
+                res.send(result);
             }
         });
     }
 
-    public getReview(req: express.Request, res: express.Response): void {
-        res.send("GET");
-    }
-
     public deleteReview(req: express.Request, res: express.Response): void {
-        res.send("DELETE");
+        Review.update({restaurantId: req.url.split("/")[2]}, 
+            { $pull: { reviews: { creatorId: new ObjectId(req.url.split("/")[3]) }}},
+            { multi: true }, 
+            (err, raw) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send("Review deleted");
+                }
+            });
     }
 
     public updateReview(req: express.Request, res: express.Response): void {
-        res.send("PUT");
+        Review.update({"restaurantId": req.url.split("/")[2],
+        "reviews.creatorId": new ObjectId(req.url.split("/")[3])}, 
+            {"reviews.$": req.body},
+            (err, raw) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send("Review updated");
+                }
+            });
     }
 
 }
