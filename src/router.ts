@@ -27,8 +27,7 @@ export class ApiRouter {
 
         // review endpoints
         this.router.post("/reviews/:id", this.controller.createReview); // restaurant id
-        this.router.get("/reviews/:id/:id", this.controller.getReview);  // restaurant id, rev id (creator id)
-        this.router.get("/reviews/:id", this.controller.getAllReviews);  // restaurant id
+        this.router.get("/reviews/:id", this.controller.getReview);  // restaurant id, rev id (creator id)
         this.router.delete("/reviews/:id/:id", this.controller.deleteReview); // rest id, rev id (creator id)
         this.router.put("/reviews/:id/:id", this.controller.updateReview); // rest id, rev id (creator id)
 

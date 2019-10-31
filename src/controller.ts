@@ -1,7 +1,6 @@
 import * as express from "express";
 import mongoose , {Document, Schema} from "mongoose";
-// import {model}
-// const User = require("../src/model.ts");
+
 import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
@@ -105,6 +104,7 @@ export class Controller {
         });
     }
 
+    // TODO delete reviews when deleting restaurant
     public deleteRestaurant(req: express.Request, res: express.Response): void {
         Restaurant.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true }, (err, model) => {
             if (err) {
@@ -140,6 +140,8 @@ export class Controller {
         });
     }
 
+    // review endpoints
+    // TODO check if user already created review
     public createReview(req: express.Request, res: express.Response): void {
         Review.findOne({ restaurantId: req.url.split("/")[2] } , (error, result) => {
             if (result) {
@@ -151,31 +153,42 @@ export class Controller {
                 };
 
                 Review.findOneAndUpdate({restaurantId: req.url.split("/")[2]}, 
-                { $push: { reviews: newReview }}, (err, model) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.send("Review created");
-                    }
-                });
+                    { $push: { reviews: newReview }}, 
+                    (err) => {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.send("Review created");
+                        }
+                    });
             } else {
                 res.send("Restaurant does not exist");
             }});
     }
 
     public getReview(req: express.Request, res: express.Response): void {
-        Review.findOne(
-            { "restaurantId": new ObjectId(req.url.split("/")[2]),
-                "reviews.creatorId": new ObjectId(req.url.split("/")[3]) }, 
-            { "reviews.$": 1 }, 
-            (err, result) => {
+        // if no creatorId, get all reviews from restaurant
+        if (!req.query.creatorId) {
+            Review.findOne({restaurantId: new ObjectId(req.url.split("/")[2])}, (err, result) => {
                 if (err) {
                     res.send(err);
                 } else {
-                    console.log(result);
-                    res.send(result);
+                    res.send(result.get("reviews"));
                 }
             });
+        } else {
+            Review.findOne(
+                { "restaurantId": new ObjectId(req.params.id),
+                    "reviews.creatorId": new ObjectId(req.query.creatorId) },
+                { "reviews.$": 1 }, 
+                (err, result) => {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.send(result);
+                    }
+                });
+        }
     }
 
     public getAllReviews(req: express.Request, res: express.Response): void {
@@ -183,14 +196,14 @@ export class Controller {
             if (err) {
                 res.send(err);
             } else {
-                res.send(result);
+                res.send(result.get("reviews"));
             }
         });
     }
 
     public deleteReview(req: express.Request, res: express.Response): void {
         Review.update({restaurantId: new ObjectId(req.url.split("/")[2])}, 
-            { $pull: { reviews: { creatorId: new ObjectId(req.url.split("/")[3]) }}},
+            { $pull: { reviews: { creatorId: new ObjectId(req.query.creatorId) }}},
             { multi: true }, 
             (err, raw) => {
                 if (err) {
@@ -203,7 +216,7 @@ export class Controller {
 
     public updateReview(req: express.Request, res: express.Response): void {
         Review.updateOne({"restaurantId": req.url.split("/")[2],
-        "reviews.creatorId": new ObjectId(req.url.split("/")[3])}, 
+        "reviews.creatorId": new ObjectId(req.query.creatorId)}, 
             { $set: {
                 "reviews.$.text": req.body.text,
                 "reviews.$.ratings": req.body.ratings,
