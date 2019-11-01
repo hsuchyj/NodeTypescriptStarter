@@ -23,12 +23,18 @@ class ApiRouter {
         this.router.put("/users/:id", this.controller.updateUser);
         this.router.delete("/users/:id", this.controller.deleteUser);
         // go to http://localhost:3000/api/newUser to add a user to the db
-        //this.router.post("/newUser", this.controller.createUser);
+        // this.router.post("/newUser", this.controller.createUser);
         // restaurant endpoints
-        this.router.post("/restaurant", this.controller.createRestaurant);
-        this.router.get("/restaurant", this.controller.getRestaurant);
-        this.router.delete("/restaurant", this.controller.deleteRestaurant);
-        this.router.put("/restaurant", this.controller.updateRestaurant);
+        this.router.post("/restaurants", this.controller.createRestaurant);
+        this.router.get("/restaurants/:id", this.controller.getRestaurant);
+        this.router.get("/restaurants/all/all", this.controller.getAllRestaurants); // might change
+        this.router.delete("/restaurants/:id", this.controller.deleteRestaurant);
+        this.router.put("/restaurants/:id", this.controller.updateRestaurant);
+        // review endpoints
+        this.router.post("/reviews/:id", this.controller.createReview); // restaurant id
+        this.router.get("/reviews/:id", this.controller.getReview); // restaurant id, rev id (creator id)
+        this.router.delete("/reviews/:id/:id", this.controller.deleteReview); // rest id, rev id (creator id)
+        this.router.put("/reviews/:id/:id", this.controller.updateReview); // rest id, rev id (creator id)
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
         return this.router;

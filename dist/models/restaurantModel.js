@@ -13,7 +13,6 @@ const RestaurantSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: "You must enter a Restaurant Name to create a restaurant",
-        unique: true,
     },
     city: {
         type: String,
@@ -43,7 +42,7 @@ const RestaurantSchema = new mongoose_1.Schema({
     createdBy: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
 });
-exports.default = mongoose_1.default.model("Restaurant", RestaurantSchema);
+exports.default = mongoose_1.default.model("Restaurant", RestaurantSchema, "restaurants");
 //# sourceMappingURL=restaurantModel.js.map

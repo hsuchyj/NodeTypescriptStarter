@@ -5,6 +5,7 @@ import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
 import Review, { IReview } from "./models/reviewModel";
+import { POINT_CONVERSION_UNCOMPRESSED } from "constants";
 
 export class Controller {
     
@@ -27,49 +28,54 @@ export class Controller {
     }
 
     public createUser(req: express.Request, res: express.Response): void {
-        // console.log(req.body.user);
-        /*
-        this is the body to be submitted
 
-        {
-            "user":"whatever",
-            "password":"okiedokie"
-        }
-        */
-        res.send("new user created");
-        const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
-        newUser.save();
+        const newUser: IUser = new User({ 
+            username: req.body.username, 
+            password: req.body.password,
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            about: req.body.about
+        });
+        
+        newUser.save( (err, product) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send("Welcome " + product.firstName + "! Your registration was");
+            }
+        });
     }
     
     public readUser(req: express.Request, res: express.Response): void {
         // if entry exists returns it as json
-        User.findById(req.params.id, "username password", { lean: true }, 
-            function(err, doc) {
-                if (doc == null) {
-                    res.send("User does not exist");
-                } else {
-                    res.json(doc);
-                }
-            });
-
-        /*
-        check if entry exists
-
-        const result = User.exists({username:"rick and morty"});
-        result.then(function(result2) {
-            console.log(result2) // "Some User token"
-         })*/
+        User.findById(req.url.split("/")[2], (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send(model);
+            }
+        });
     }
 
     public updateUser(req: express.Request, res: express.Response): void {
-        User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, model) {
-            res.send("User has been updated");
+        User.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true}, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send(model);
+            }
         });
     }
 
     public deleteUser(req: express.Request, res: express.Response): void {
-        User.findByIdAndDelete(req.params.id, function(err, model) {
-            res.send("User deleted");
+        User.findByIdAndUpdate(req.url.split("/")[2], req.body, {new: true}, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                model.remove();
+                res.send("User deleted successfully");
+            }
         });
     }
 
