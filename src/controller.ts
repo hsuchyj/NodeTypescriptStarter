@@ -59,14 +59,23 @@ export class Controller {
     }
 
     public updateUser(req: express.Request, res: express.Response): void {
-        User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, model) {
-            res.send("User has been updated");
+        User.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true}, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send(model);
+            }
         });
     }
 
     public deleteUser(req: express.Request, res: express.Response): void {
-        User.findByIdAndDelete(req.params.id, function(err, model) {
-            res.send("User deleted");
+        User.findByIdAndUpdate(req.url.split("/")[2], req.body, {new: true}, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                model.remove();
+                res.send("User deleted successfully");
+            }
         });
     }
 

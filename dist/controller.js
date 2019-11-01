@@ -53,13 +53,24 @@ class Controller {
         });
     }
     updateUser(req, res) {
-        userModel_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, model) {
-            res.send("User has been updated");
+        userModel_1.default.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true }, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            }
+            else {
+                res.send(model);
+            }
         });
     }
     deleteUser(req, res) {
-        userModel_1.default.findByIdAndDelete(req.params.id, function (err, model) {
-            res.send("User deleted");
+        userModel_1.default.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true }, (err, model) => {
+            if (err) {
+                res.send(err.message);
+            }
+            else {
+                model.remove();
+                res.send("User deleted successfully");
+            }
         });
     }
     // Restaurant Endpoints
