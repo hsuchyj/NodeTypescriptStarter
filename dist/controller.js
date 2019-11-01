@@ -37,27 +37,20 @@ class Controller {
                 res.send(err.message);
             }
             else {
-                res.send("Welcome " + product.firstName + "! Your registration was successful.");
+                res.send("Welcome " + product.firstName + "! Your registration was");
             }
         });
     }
     readUser(req, res) {
         // if entry exists returns it as json
-        userModel_1.default.findById(req.params.id, "username password", { lean: true }, function (err, doc) {
-            if (doc == null) {
-                res.send("User does not exist");
+        userModel_1.default.findById(req.url.split("/")[2], (err, model) => {
+            if (err) {
+                res.send(err.message);
             }
             else {
-                res.json(doc);
+                res.send(model);
             }
         });
-        /*
-        check if entry exists
-
-        const result = User.exists({username:"rick and morty"});
-        result.then(function(result2) {
-            console.log(result2) // "Some User token"
-         })*/
     }
     updateUser(req, res) {
         userModel_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, model) {

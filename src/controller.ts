@@ -42,29 +42,20 @@ export class Controller {
             if (err) {
                 res.send(err.message);
             } else {
-                res.send("Welcome " + product.firstName + "! Your registration was successful.");
+                res.send("Welcome " + product.firstName + "! Your registration was");
             }
         });
     }
     
     public readUser(req: express.Request, res: express.Response): void {
         // if entry exists returns it as json
-        User.findById(req.params.id, "username password", { lean: true }, 
-            function(err, doc) {
-                if (doc == null) {
-                    res.send("User does not exist");
-                } else {
-                    res.json(doc);
-                }
-            });
-
-        /*
-        check if entry exists
-
-        const result = User.exists({username:"rick and morty"});
-        result.then(function(result2) {
-            console.log(result2) // "Some User token"
-         })*/
+        User.findById(req.url.split("/")[2], (err, model) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send(model);
+            }
+        });
     }
 
     public updateUser(req: express.Request, res: express.Response): void {
