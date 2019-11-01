@@ -5,6 +5,7 @@ import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
 import Review, { IReview } from "./models/reviewModel";
+import { POINT_CONVERSION_UNCOMPRESSED } from "constants";
 
 export class Controller {
     
@@ -27,18 +28,23 @@ export class Controller {
     }
 
     public createUser(req: express.Request, res: express.Response): void {
-        // console.log(req.body.user);
-        /*
-        this is the body to be submitted
 
-        {
-            "user":"whatever",
-            "password":"okiedokie"
-        }
-        */
-        res.send("new user created");
-        const newUser: IUser = new User({ username: req.body.user, password: req.body.password});
-        newUser.save();
+        const newUser: IUser = new User({ 
+            username: req.body.username, 
+            password: req.body.password,
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            about: req.body.about
+        });
+        
+        newUser.save( (err, product) => {
+            if (err) {
+                res.send(err.message);
+            } else {
+                res.send("Welcome " + product.firstName + "! Your registration was successful.");
+            }
+        });
     }
     
     public readUser(req: express.Request, res: express.Response): void {
