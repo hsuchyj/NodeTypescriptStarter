@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require("bcrypt-nodejs");
 
 // Insert interface here
 export interface IUser extends Document {
@@ -66,31 +66,30 @@ export const UserSchema = new Schema({
     timestamps: true,
   });
 
-
   // Pre-save of user to database, hash password if password is modified or new
-  UserSchema.pre<IUser>('save', function (next: any) {
+UserSchema.pre<IUser>("save", function(next: any) {
     const user = this,
     SALT_FACTOR = 5;
 
-    if (!user.isModified('password')) return next();
+    if (!user.isModified("password")) { return next(); }
 
-    bcrypt.genSalt(SALT_FACTOR, function (err:any, salt: any) {
-      if (err) return next(err);
+    bcrypt.genSalt(SALT_FACTOR, function(err: any, salt: any) {
+      if (err) { return next(err); }
 
-      bcrypt.hash(user.password, salt, null, function (err: any, hash: any) {
-        if (err) return next(err);
+      bcrypt.hash(user.password, salt, null, function(err: any, hash: any) {
+        if (err) { return next(err); }
         user.password = hash;
         next();
       });
     });
   });
 
-UserSchema.method('comparePassword', function (password: String): boolean {
-  if (bcrypt.compareSync(password, this.password)) return true;
+UserSchema.method("comparePassword", function(password: String): boolean {
+  if (bcrypt.compareSync(password, this.password)) { return true; }
   return false;
 });
 
-UserSchema.methods.toJson = function () {
+UserSchema.methods.toJson = function() {
   return {
     username: this.username,
     password: this.password,
@@ -98,7 +97,7 @@ UserSchema.methods.toJson = function () {
     firstName: this.firstName,
     lastName: this.lasName,
     about: this.about
-  }
-}
+  };
+};
 
 export default mongoose.model<IUser>("User", UserSchema, "users");

@@ -1,13 +1,13 @@
 import * as express from "express";
-//import mongoose , {Document, Schema} from "mongoose";
+// import mongoose , {Document, Schema} from "mongoose";
 // import {model}
 // const User = require("../src/model.ts");
 import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
-import mongoose , {Schema,Document} from "mongoose";
-//import {model}
-//const User = require("../src/model.ts");
+import mongoose , {Schema, Document} from "mongoose";
+// import {model}
+// const User = require("../src/model.ts");
 
 export class Controller {
     
