@@ -5,7 +5,7 @@ import User, { IUser } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
 import Review, { IReview } from "./models/reviewModel";
-import { POINT_CONVERSION_UNCOMPRESSED } from "constants";
+import { fstat } from "fs";
 
 export class Controller {
     
@@ -81,7 +81,7 @@ export class Controller {
 
     // Restaurant Endpoints
     public getRestaurant(req: express.Request, res: express.Response): void {
-        Restaurant.findById( req.url.split("/")[2], (err, model) => {
+        Restaurant.findById( req.params.id, (err, model) => {
             if (err) {
                 res.send(err);
             } else {
@@ -101,7 +101,7 @@ export class Controller {
     }
 
     public updateRestaurant(req: express.Request, res: express.Response): void {
-        Restaurant.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true }, (err, model) => {
+        Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, model) => {
             if (err) {
                 res.send(err);
             } else {
@@ -110,46 +110,61 @@ export class Controller {
         });
     }
 
-    // TODO delete reviews when deleting restaurant
     public deleteRestaurant(req: express.Request, res: express.Response): void {
-        Restaurant.findByIdAndUpdate(req.url.split("/")[2], req.body, { new: true }, (err, model) => {
+        Restaurant.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, model) => {
             if (err) {
                 res.send(err);
             } else {
                 model.remove();
-                res.send("Entry deleted");
+                res.send("Restaurant deleted and reviews erased");
+            }
+        });
+
+        Review.findOneAndDelete({ restaurantId: req.params.id }, (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                result.remove();
             }
         });
     }
 
     public createRestaurant(req: express.Request, res: express.Response): void {
-        const newRestaurant: IRestaurant = new Restaurant({
-            name: req.body.name,
-            city: req.body.city,
-            state: req.body.state,
-            address: req.body.address,
-            website: req.body.website,
-            description: req.body.description
-        });
-        newRestaurant.save( (err, product) => {
-            if (err) {
-                res.send(err);
-            } else {
-                const newReview: IReview = new Review({
-                    reviews: [],
-                    name: req.body.name,
-                    restaurantId: mongoose.Types.ObjectId(product._id)
-                });
-                newReview.save();
-                res.send(product._id);
-            }
-        });
+
+            const newRestaurant: IRestaurant = new Restaurant({
+                alias: req.body.alias,
+                name: req.body.name,
+                image_url: req.body.image_url,
+                review_count: 0,
+                categories: req.body.categories,
+                transactions: req.body.transactions,
+                rating: req.body.rating,
+                coordinates: req.body.coordinates,
+                location: req.body.location,
+                phone: req.body.phone,
+                display_phone: req.body.display_phone
+            });
+            newRestaurant.save( (err, product) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    const newReview: IReview = new Review({
+                        reviews: [],
+                        alias: req.body.alias,
+                        restaurantId: mongoose.Types.ObjectId(product._id)
+                    });
+                    newReview.save();
+                    res.send(product);
+                }
+            });
     }
 
     // review endpoints
     // TODO check if user already created review
+    // TODO increment review count of restaurant after a review is created
     public createReview(req: express.Request, res: express.Response): void {
-        Review.findOne({ restaurantId: req.url.split("/")[2] } , (error, result) => {
+
+        Review.findOne({ restaurantId: req.params.id } , (error, result) => {
             if (result) {
                 const newReview = {
                     creatorId: mongoose.Types.ObjectId(req.body.creatorId),
@@ -158,7 +173,7 @@ export class Controller {
                     ratings: req.body.ratings
                 };
 
-                Review.findOneAndUpdate({restaurantId: req.url.split("/")[2]}, 
+                Review.findOneAndUpdate({restaurantId: req.params.id}, 
                     { $push: { reviews: newReview }}, 
                     (err) => {
                         if (err) {
@@ -170,12 +185,13 @@ export class Controller {
             } else {
                 res.send("Restaurant does not exist");
             }});
+        
     }
 
     public getReview(req: express.Request, res: express.Response): void {
         // if no creatorId, get all reviews from restaurant
         if (!req.query.creatorId) {
-            Review.findOne({restaurantId: new ObjectId(req.url.split("/")[2])}, (err, result) => {
+            Review.findOne({restaurantId: new ObjectId(req.params.id)}, (err, result) => {
                 if (err) {
                     res.send(err);
                 } else {
@@ -197,18 +213,8 @@ export class Controller {
         }
     }
 
-    public getAllReviews(req: express.Request, res: express.Response): void {
-        Review.findOne({restaurantId: new ObjectId(req.url.split("/")[2])}, (err, result) => {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(result.get("reviews"));
-            }
-        });
-    }
-
     public deleteReview(req: express.Request, res: express.Response): void {
-        Review.update({restaurantId: new ObjectId(req.url.split("/")[2])}, 
+        Review.update({restaurantId: new ObjectId(req.params.id)}, 
             { $pull: { reviews: { creatorId: new ObjectId(req.query.creatorId) }}},
             { multi: true }, 
             (err, raw) => {
@@ -221,7 +227,7 @@ export class Controller {
     }
 
     public updateReview(req: express.Request, res: express.Response): void {
-        Review.updateOne({"restaurantId": req.url.split("/")[2],
+        Review.updateOne({"restaurantId": req.params.id,
         "reviews.creatorId": new ObjectId(req.query.creatorId)}, 
             { $set: {
                 "reviews.$.text": req.body.text,

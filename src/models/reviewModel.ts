@@ -23,7 +23,7 @@ const ReviewSchema: Schema = new Schema ({
         ref: "RestaurantId"
     },
 
-    name: {
+    alias: {
         type: String
     },
 
