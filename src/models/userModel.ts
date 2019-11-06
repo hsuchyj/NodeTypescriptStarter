@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
+const bcrypt = require("bcrypt-nodejs");
 
 // Insert interface here
 export interface IUser extends Document {
@@ -11,7 +12,7 @@ export interface IUser extends Document {
 }
 
 // Insert Schema definition here
-const UserSchema: Schema = new Schema({
+export const UserSchema = new Schema({
     username: {
       type: String, 
       required: "You must enter a username to register",
@@ -52,7 +53,47 @@ const UserSchema: Schema = new Schema({
     about: { // About Me profile section
       type: String,
       maxlength: [255, "About Me section is limited to 255 characters"]
-    }
+    },
+
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date }
+  },
+  {
+    timestamps: true,
   });
+
+  // Pre-save of user to database, hash password if password is modified or new
+UserSchema.pre<IUser>("save", function(next: any) {
+    const user = this,
+    SALT_FACTOR = 5;
+
+    if (!user.isModified("password")) { return next(); }
+
+    bcrypt.genSalt(SALT_FACTOR, function(err: any, salt: any) {
+      if (err) { return next(err); }
+
+      bcrypt.hash(user.password, salt, null, function(err: any, hash: any) {
+        if (err) { return next(err); }
+        user.password = hash;
+        next();
+      });
+    });
+  });
+
+UserSchema.method("comparePassword", function(password: String): boolean {
+  if (bcrypt.compareSync(password, this.password)) { return true; }
+  return false;
+});
+
+UserSchema.methods.toJson = function() {
+  return {
+    username: this.username,
+    password: this.password,
+    email: this.email,
+    firstName: this.firstName,
+    lastName: this.lasName,
+    about: this.about
+  };
+};
 
 export default mongoose.model<IUser>("User", UserSchema, "users");
