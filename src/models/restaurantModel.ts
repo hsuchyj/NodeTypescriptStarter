@@ -1,65 +1,81 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IRestaurant extends Document {
-    name: string;
-    city: string;
-    state: string;
-    address: string;
-    website: string;
-    description: string;
-    createdBy: mongoose.Schema.Types.ObjectId; // Unsure if this is the correct format
-    reviews: [mongoose.Schema.Types.ObjectId]; // An array of 0 or more reviews
-  }
+  alias: string;  
+  name: string;
+  image_url: string;
+  review_count: number;
+  categories: Array<{ 
+    alias: string,
+    title: string
+  }>;
+  transactions: string[];
+  rating: number;
+  coordinate: {
+    latitude: number,
+    longitude: number
+  };
+  location: {
+    address1: string,
+    address2: string,
+    address3: string,
+    city: string,
+    zip_code: string,
+    country: string,
+    state: string,
+    display_address: string[]
+  };
+  phone: string;
+  display_phone: string;
+}
 
     // NOTE: Need to utilize the .populate method in our CRUD implementations of this schema see below
 const RestaurantSchema: Schema = new Schema({
 
-    name: {
-      type: String,
-      required: "You must enter a Restaurant Name to create a restaurant",
-    },
-  
-    city: {
-      type: String,
-      required: "You must enter a City to create a restaurant",
-      trim: true
-    },
-  
-    state: {
-      type: String,
-      required: "You must enter a State to create a restaurant",
-      trim: true
-    },
-  
-    // Address does NOT have a required field because all we really need to do sorting by location is City and State
-    address: { 
-      type: String,
-      match: [/^\s*\S+(?:\s+\S+){2}/, "Please enter a valid Street Address"] // REGEX to test validity
-    },
-  
-    website: {
-      type: String,
-      match: [/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi, "Please enter a valid Web Address"] // REGEX to test validity
-    },
-  
-    description: {
-      type: String,
-      maxlength: [255, "Restaurant description section is limited to 255 characters"],
-    },
-  
-    // This essentially allows us to nest a user object from the collection USER as the data for this field
-    // We will need to use the .populate method to fill this field dynamically when we implement CRUD methods
-     createdBy: {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: "User"
-    },
+  alias: {
+    type: String
+  },
 
-    // Array of 0 or more reviews
-    reviews: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "User" // Not sure if we should be using User as the table for reviews 
-    }
-   }, {collection: "restaurants"}
-  );
+  name: {
+    type: String
+  },
 
-export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema);
+  image_url: {
+    type: String
+  },
+
+  review_count: {
+    type: Number
+  },
+
+  categories: {
+    type: Array
+  },
+
+  transactions: {
+    type: Array
+  },
+
+  rating: {
+    type: Number
+  }, 
+
+  coordinates: {
+    type: Object
+  },
+
+  location: {
+    type: Object
+  },
+
+  phone: {
+    type: String
+  },
+
+  display_phone: {
+    type: String
+  },
+
+});
+
+export default mongoose.model<IRestaurant>("Restaurant", RestaurantSchema, "restaurants");
