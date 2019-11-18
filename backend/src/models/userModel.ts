@@ -1,5 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require("bcrypt");
+// import bcrypt from "bcrypt-nodejs";
+const saltRounds = 10;
 
 // Insert interface here
 export interface IUser extends Document {
@@ -9,10 +11,11 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   about: string;
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 // Insert Schema definition here
-export const UserSchema = new Schema({
+export const UserSchema = new mongoose.Schema({
     username: {
       type: String, 
       required: "You must enter a username to register",
@@ -54,14 +57,43 @@ export const UserSchema = new Schema({
       type: String,
       maxlength: [255, "About Me section is limited to 255 characters"]
     },
+  }, { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } });
 
+  // Save function for salting prior to execution
+UserSchema.pre<IUser>("save", function(next) {
+    bcrypt.hash(this.password, 10, (err: any, hash: any) => {
+      this.password = hash;
+      next();
+    });
+  });
+
+  // Update function for salting prior to execution
+UserSchema.pre<IUser>("update", function(next) {
+    bcrypt.hash(this.password, 10, (err: any, hash: any) => {
+      this.password = hash;
+      next();
+    });
+  });
+
+UserSchema.methods.comparePassword = function(candidatePassword: string): Promise<boolean> {
+    const password = this.password;
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(candidatePassword, password, (err: any, success: any) => {
+            if (err) { return reject(err); }
+            return resolve(success);
+        });
+    });
+};
+    /*
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date }
   },
   {
     timestamps: true,
   });
+  */
 
+  /*
   // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre<IUser>("save", function(next: any) {
     const user = this,
@@ -95,5 +127,6 @@ UserSchema.methods.toJson = function() {
     about: this.about
   };
 };
+*/
 
 export default mongoose.model<IUser>("User", UserSchema, "users");

@@ -1,8 +1,9 @@
+/*
 const jwt = require("jsonwebtoken");
 const cryptov = require("crypto");
 const User = require("../models/userModel");
 const config = require("../config/config");
-import * as express from 'express';
+import * as express from "express";
 
 function generateToken(user: any) {
     return jwt.sign(user, config.secret, {
@@ -108,3 +109,4 @@ exports.register = function(req: express.Request, res: express.Response, next: a
         }
     });
 };
+*/
