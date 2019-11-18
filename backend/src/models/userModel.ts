@@ -64,8 +64,8 @@ export const UserSchema = new Schema({
 
   // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre<IUser>("save", function(next: any) {
-    const user = this,
-    SALT_FACTOR = 5;
+    const user = this;
+    const SALT_FACTOR = 5;
 
     if (!user.isModified("password")) { return next(); }
 
@@ -80,7 +80,7 @@ UserSchema.pre<IUser>("save", function(next: any) {
     });
   });
 
-UserSchema.method("comparePassword", function(password: String): boolean {
+UserSchema.method("comparePassword", function(password: string): boolean {
   if (bcrypt.compareSync(password, this.password)) { return true; }
   return false;
 });

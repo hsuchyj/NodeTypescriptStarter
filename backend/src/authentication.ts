@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const cryptov = require("crypto");
 const User = require("../models/userModel");
 const config = require("../config/config");
-import * as express from 'express';
+import * as express from "express";
 
 function generateToken(user: any) {
     return jwt.sign(user, config.secret, {
@@ -67,7 +67,7 @@ exports.register = function(req: express.Request, res: express.Response, next: a
     User.findOne({ email }, function(err: any, existingUser: any) {
         if (err) { return next(err); }
         if (existingUser) {
-            if (existingUser.auths.clients.filter(function(item: any) { return item == clientid; }).length > 0) {
+            if (existingUser.auths.clients.filter(function(item: any) { return item === clientid; }).length > 0) {
                 return res.status(422).send({ error: "That email address is already in use for this client." });
             } else {
                 existingUser.auths.clients.push(clientid);
@@ -75,7 +75,7 @@ exports.register = function(req: express.Request, res: express.Response, next: a
                 for (i = 0; i < authAPIs.length; i++) {
                     if (existingUser.auths.apis.filter(function(item: any) {
                         return item === authAPIs[i];
-                    }).length == 0) {
+                    }).length === 0) {
                         existingUser.auths.apis.push(authAPIs[i]);
                     }
                 }
