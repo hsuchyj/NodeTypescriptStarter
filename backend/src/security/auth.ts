@@ -16,7 +16,7 @@ class Auth {
     }
 
     public authenticate = (callback: any) => passport.authenticate
-        ("jwt", { session: false, failWithError: true }, callback)
+        ("jwt", { session: false, failWithError: true }, callback);
 
     // Login method for authentication
     public login = async (req: any, res: any) => {
