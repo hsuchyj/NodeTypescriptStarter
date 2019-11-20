@@ -72,6 +72,7 @@ exports.register = function(req: express.Request, res: express.Response, next: a
         return res.status(422).send({ error: "You must enter a username"});
     }
 
+    //Remove all logic from this related to clientid and authAPIs
     User.findOne({ email }, function(err: any, existingUser: any) {
         if (err) { return next(err); }
         if (existingUser) {

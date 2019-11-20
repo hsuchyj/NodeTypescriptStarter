@@ -6,6 +6,8 @@ import * as passportService from "./security/passport";
 export class ApiRouter {
     private router: express.Router = express.Router();
     private controller: Controller = new Controller();
+    private passportService: any = passportService;
+    private authentication: any = authentication;
 
     // Creates the routes for this router and returns a populated router object
     public getRouter(): express.Router {
@@ -18,7 +20,7 @@ export class ApiRouter {
         this.router.delete("/users/:id", this.controller.deleteUser);
 
         // Authentication stuff
-        // this.router.get("/authorize", passportService.requireAuth, authentication.authorize);
+        this.router.get("/authorize", this.passportService.requireAuth, this.authentication.authorize);
 
         // go to http://localhost:3000/api/newUser to add a user to the db
         // this.router.post("/newUser", this.controller.createUser);
