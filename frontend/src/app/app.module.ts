@@ -8,6 +8,7 @@ import { AboutComponent } from './views/about/about.component';
 import { MenuComponent } from './navigation/menu/menu.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileComponent} from './views/profile/profile.component';
+import { SidebarComponent } from './navigation/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {ProfileComponent} from './views/profile/profile.component';
     HomeComponent,
     AboutComponent,
     MenuComponent,
-    ProfileComponent
+    ProfileComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
