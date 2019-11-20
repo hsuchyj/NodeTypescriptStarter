@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const cryptov = require("crypto");
-const User = require("../models/userModel");
+const User = require("./models/userModel"); // Fixed the path here
 const config = require("../config/config");
 import * as express from "express";
+import { IUser } from "./models/userModel";
 
 function generateToken(user: any) {
     return jwt.sign(user, config.secret, {
@@ -39,13 +40,16 @@ exports.authorize = function(req: express.Request, res: express.Response, next: 
 // ===================================
 // Registration Route
 // ===================================
+// Modified by Collin to comply with our User Model
 exports.register = function(req: express.Request, res: express.Response, next: any) {
     // Check for registration errors
     const email = req.body.email;
+    const username = req.body.username;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
     const clientid = req.body.clientid;
+    const about = req.body.about;
     let authAPIs = req.body.authAPIs;
 
     if (!authAPIs) {
@@ -62,6 +66,10 @@ exports.register = function(req: express.Request, res: express.Response, next: a
     }
     if (!password) {
         return res.status(422).send({ error: "You must enter a password." });
+    }
+
+    if (!username) {
+        return res.status(422).send({ error: "You must enter a username"});
     }
 
     User.findOne({ email }, function(err: any, existingUser: any) {
@@ -89,13 +97,16 @@ exports.register = function(req: express.Request, res: express.Response, next: a
                 });
             }
         } else {
-            const user = new User({
-                email,
+            const user: IUser = new User({
+                username,
                 password,
+                email,
+                firstName,
+                lastName,
+                about,
                 provider: "local",
                 roles: ["User"],
                 auths: { clients: [clientid], apis: authAPIs },
-                profile: { firstName, lastName }
             });
             user.save(function(err: any, user: any) {
                 if (err) { return next(err); }

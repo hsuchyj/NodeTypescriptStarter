@@ -1,5 +1,7 @@
 import * as express from "express";
 import {Controller} from "./controller";
+import * as authentication from "./authentication"; // added this to get authentication methods
+import * as passportService from "./security/passport";
 
 export class ApiRouter {
     private router: express.Router = express.Router();
@@ -14,6 +16,9 @@ export class ApiRouter {
         this.router.get("/users/:id", this.controller.readUser);
         this.router.put("/users/:id", this.controller.updateUser);
         this.router.delete("/users/:id", this.controller.deleteUser);
+
+        // Authentication stuff
+        // this.router.get("/authorize", passportService.requireAuth, authentication.authorize);
 
         // go to http://localhost:3000/api/newUser to add a user to the db
         // this.router.post("/newUser", this.controller.createUser);
