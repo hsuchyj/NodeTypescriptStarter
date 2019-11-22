@@ -20,7 +20,9 @@ export class ApiRouter {
         this.router.delete("/users/:id", this.controller.deleteUser);
 
         // Authentication stuff
-        this.router.get("/authorize", this.passportService.requireAuth, this.authentication.authorize);
+        this.router.get("/authorize", this.passportService.requireAuth, this.authentication.authorize); // protected
+        this.router.post("/register", this.authentication.register); // unprotected
+        this.router.post("/login", this.authentication.login); // unprotected
 
         // go to http://localhost:3000/api/newUser to add a user to the db
         // this.router.post("/newUser", this.controller.createUser);

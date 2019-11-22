@@ -48,16 +48,10 @@ exports.register = function(req: express.Request, res: express.Response, next: a
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
-    const clientid = req.body.clientid;
+    // const clientid = req.body.clientid; 
     const about = req.body.about;
-    let authAPIs = req.body.authAPIs;
+    // let authAPIs = req.body.authAPIs;
 
-    if (!authAPIs) {
-        authAPIs = [];
-    }
-    if (!clientid) {
-        return res.status(422).send({ error: "No clientid passed to register against." });
-    }
     if (!email) {
         return res.status(422).send({ error: "You must enter an email address." });
     }
@@ -72,31 +66,15 @@ exports.register = function(req: express.Request, res: express.Response, next: a
         return res.status(422).send({ error: "You must enter a username"});
     }
 
-    //Remove all logic from this related to clientid and authAPIs
+    // TODO: Remove all logic from this related to clientid and authAPIs
     User.findOne({ email }, function(err: any, existingUser: any) {
+        // Not sure what would cause an error to be returned here
         if (err) { return next(err); }
+        // If we found a user with the same email
         if (existingUser) {
-            if (existingUser.auths.clients.filter(function(item: any) { return item === clientid; }).length > 0) {
-                return res.status(422).send({ error: "That email address is already in use for this client." });
-            } else {
-                existingUser.auths.clients.push(clientid);
-                let i: number;
-                for (i = 0; i < authAPIs.length; i++) {
-                    if (existingUser.auths.apis.filter(function(item: any) {
-                        return item === authAPIs[i];
-                    }).length === 0) {
-                        existingUser.auths.apis.push(authAPIs[i]);
-                    }
-                }
-                existingUser.save(function(err: any, user: any) {
-                    if (err) { return next(err); }
-                    const userInfo = existingUser.toJson();
-                    res.status(201).json({
-                        token: "JWT " + generateToken(userInfo),
-                        user: userInfo
-                    });
-                });
-            }
+            // Inform the user that the email address is already in use
+            return res.status(422).send({ error: "That email address is already in use for this client." });
+        // Otherwise create the new user 
         } else {
             const user: IUser = new User({
                 username,
@@ -105,10 +83,11 @@ exports.register = function(req: express.Request, res: express.Response, next: a
                 firstName,
                 lastName,
                 about,
-                provider: "local",
-                roles: ["User"],
-                auths: { clients: [clientid], apis: authAPIs },
+                // provider: "local",
+                roles: ["User"]
+                // auths: { clients: [clientid], apis: authAPIs },
             });
+            // Save the user now that we've created the object from input
             user.save(function(err: any, user: any) {
                 if (err) { return next(err); }
                 const userInfo = user.toJson();

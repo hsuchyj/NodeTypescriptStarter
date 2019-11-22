@@ -112,7 +112,7 @@ UserSchema.methods.toJson = function() {
     lastName: this.lasName,
     about: this.about,
     role: this.role,
-    provider: this.provider
+    // provider: this.provider
   };
 };
 
