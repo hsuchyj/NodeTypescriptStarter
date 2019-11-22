@@ -20,7 +20,7 @@ export class RestaurantListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Restaurant list initiated');
+    console.log(this.restaurants);
   }
 
 }

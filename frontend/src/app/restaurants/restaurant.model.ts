@@ -3,11 +3,11 @@ export class Restaurant {
                 public name: string,
                 public rating: number,
                 public categories: Array<object>,
-                public imagePath: string,
-                public reviewCount: number,
+                public image_url: string,
+                public review_count: number,
                 public transactions: string[],
-                public coordinate: object,
+                public coordinates: object,
                 public location: object,
                 public phone: string,
-                public displayPhone: string) {}
+                public display_phone: string) {}
 }

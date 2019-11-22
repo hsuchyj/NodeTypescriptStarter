@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class RestaurantResolver implements Resolve<any>{
+export class RestaurantResolver implements Resolve<any> {
     constructor(private http: HttpClient) {}
 
     resolve(route: ActivatedRouteSnapshot, rstate: RouterStateSnapshot): Observable<any> {
