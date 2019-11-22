@@ -11,10 +11,11 @@
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
+    margin-left: -1025px;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -760px;
 }
 
 a[data-toggle="collapse"] {
