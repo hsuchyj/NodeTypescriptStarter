@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-auto">
+    <a
+      href="#"
+      class="list-group-item clearfix"
+      *ngFor="let restaurant of restaurants"
+    >
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">
+          {{ restaurant.name }}
+        </h4>
+        <p class="list-group-item-text">Rating: {{ restaurant.rating }}</p>
+        <p class="list-group-item-text" >{{ restaurant.categories }}</p>
+      </div>
+      <span class="pull-right">
+        <img [src]="restaurant.imagePath" alt="{{ restaurant.name }}" class="img-responsive" style="max-height: 50px;" />
+      </span>
+    </a>
+    <app-restaurant-item></app-restaurant-item>
+  </div>
+</div>
