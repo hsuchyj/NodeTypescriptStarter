@@ -1,15 +1,16 @@
 // Importing Passport, strategies, and config
 // Everything looks good to me
 const passport = require("passport");
-const User = require("../model/userModel");
-const config = require("../config/config");
+const User = require("../models/userModel");
+//const config = require("../config/config");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
+const secret = "ODK5rECI*bGj4ffHg7ybtzQ2*";
 
 export const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.secret
+    secretOrKey: secret
 };
 
 // Setting up JWT login strategy

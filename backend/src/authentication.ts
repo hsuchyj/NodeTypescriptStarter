@@ -1,12 +1,21 @@
 const jwt = require("jsonwebtoken");
 const cryptov = require("crypto");
 const User = require("./models/userModel"); // Fixed the path here
-const config = require("../config/config");
+// const config = require("./config/config");
 import * as express from "express";
 import { IUser } from "./models/userModel";
+const secret = "ODK5rECI*bGj4ffHg7ybtzQ2*";
 
+/*
 function generateToken(user: any) {
     return jwt.sign(user, config.secret, {
+        expiresIn: 10080 // in seconds
+    });
+}
+*/
+
+function generateToken(user: any) {
+    return jwt.sign(user, secret, {
         expiresIn: 10080 // in seconds
     });
 }

@@ -15,7 +15,8 @@ export class ApiRouter {
         this.controller.setupDb();
         // go to http://localhost:3000/api/users to add a user to the db
         this.router.post("/users", this.controller.createUser);
-        this.router.get("/users/:id", this.controller.readUser);
+        this.router.get("/users/:id", this.passportService.requireAuth, this.controller.readUser); // protected
+        // this.router.get("/users/:id", this.controller.readUser);
         this.router.put("/users/:id", this.controller.updateUser);
         this.router.delete("/users/:id", this.controller.deleteUser);
 
