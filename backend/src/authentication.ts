@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const cryptov = require("crypto");
-const User = require("./models/userModel"); // Fixed the path here
+// const User = require("./models/userModel"); // Fixed the path here
 // const config = require("./config/config");
 import * as express from "express";
-import { IUser } from "./models/userModel";
+// import { IUser } from "./models/userModel";
+import { IUser, UserModel as User } from "./models/userModel";
 const secret = "ODK5rECI*bGj4ffHg7ybtzQ2*";
 
 /*
@@ -24,7 +25,7 @@ function generateToken(user: any) {
 // Login Route
 // =================================
 exports.login = function(req: express.Request, res: express.Response, next: any) {
-    User.findOne({ email: req.body.email }, function(err: any, user: any) {
+    User.findOne({ email: req.body.email, username: req.body.username }, function(err: any, user: any) {
         if (err) { return res.status(400).json({ error: "bad data" }); }
         if (!user) { return res.status(400).json({ error: "Your login details could not be verified." }); }
         user.comparePassword(req.body.password, function(err: any, isMatch: boolean) {
