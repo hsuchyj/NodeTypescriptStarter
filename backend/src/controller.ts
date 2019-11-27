@@ -1,7 +1,7 @@
 import * as express from "express";
 import mongoose , {Document, Schema} from "mongoose";
 
-import User, { IUser } from "./models/userModel";
+import { IUser, UserModel as User } from "./models/userModel";
 import Restaurant, { IRestaurant } from "./models/restaurantModel";
 import { ObjectId } from "mongodb";
 import Review, { IReview } from "./models/reviewModel";
