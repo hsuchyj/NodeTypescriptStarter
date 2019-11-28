@@ -1,4 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
+import * as mongoose from "mongoose";
 import * as bcrypt from "bcryptjs";
 // const bcrypt = require("bcrypt-nodejs");
 
