@@ -5,6 +5,7 @@ import { AboutComponent } from './views/about/about.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'user', component: ProfileComponent},
-  {path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }}
+  {path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
