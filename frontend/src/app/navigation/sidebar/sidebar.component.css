@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     align-items: stretch;
+    margin-top: -24px;
 }
 
 #sidebar {
@@ -75,9 +76,9 @@ ul ul a {
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: -1025px;
     }
     #sidebar.active {
-        margin-left: 0;
+        margin-left: -760px;
     }
 }
