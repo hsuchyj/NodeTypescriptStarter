@@ -11,7 +11,6 @@ import { MenuComponent } from './navigation/menu/menu.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ProfileComponent} from './views/profile/profile.component';
 import { SidebarComponent } from './navigation/sidebar/sidebar.component';
-import { ProfileComponent } from './views/profile/profile.component';
 
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantListComponent } from './restaurants/restaurant-list/restaurant-list.component';
@@ -19,6 +18,7 @@ import { RestaurantItemComponent } from './restaurants/restaurant-list/restauran
 import { RestaurantDetailComponent } from './restaurants/restaurant-detail/restaurant-detail.component';
 import { ReviewsComponent } from './restaurants/restaurant-reviews-list/reviews/reviews.component';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,13 +26,14 @@ import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews
     AboutComponent,
     MenuComponent,
     ProfileComponent,
-    SidebarComponent
+    SidebarComponent,
     RestaurantsComponent,
     RestaurantListComponent,
     RestaurantItemComponent,
     RestaurantDetailComponent,
     ReviewsComponent,
-    RestaurantReviewsListComponent
+    RestaurantReviewsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
