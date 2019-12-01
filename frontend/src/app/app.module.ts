@@ -19,6 +19,7 @@ import { RestaurantDetailComponent } from './restaurants/restaurant-detail/resta
 import { ReviewsComponent } from './restaurants/restaurant-reviews-list/reviews/reviews.component';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,12 +34,14 @@ import { LoginComponent } from './login/login.component';
     RestaurantDetailComponent,
     ReviewsComponent,
     RestaurantReviewsListComponent,
-    //LoginComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

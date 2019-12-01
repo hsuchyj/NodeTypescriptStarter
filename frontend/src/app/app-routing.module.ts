@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'user', component: ProfileComponent},
   {path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }},
-  //{path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
