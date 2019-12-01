@@ -5,7 +5,7 @@ import { AboutComponent } from './views/about/about.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver';
-//import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [

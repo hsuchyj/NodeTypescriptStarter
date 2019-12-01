@@ -18,7 +18,7 @@ import { RestaurantItemComponent } from './restaurants/restaurant-list/restauran
 import { RestaurantDetailComponent } from './restaurants/restaurant-detail/restaurant-detail.component';
 import { ReviewsComponent } from './restaurants/restaurant-reviews-list/reviews/reviews.component';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
-//import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
