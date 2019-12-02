@@ -16,9 +16,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'user', component: ProfileComponent},
   { path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }, children: [
-    { path: '', component: RestaurantsComponent },
     { path: ':id', component: RestaurantReviewsListComponent }
-  ]}
+  ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent}
 ];
