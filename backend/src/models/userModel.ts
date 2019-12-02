@@ -1,5 +1,7 @@
-import mongoose, { Document, Schema } from "mongoose";
-const bcrypt = require("bcrypt-nodejs");
+import { Document, Schema } from "mongoose";
+import * as mongoose from "mongoose";
+import * as bcrypt from "bcryptjs";
+// const bcrypt = require("bcrypt-nodejs");
 
 // Insert interface here
 export interface IUser extends Document {
@@ -72,7 +74,9 @@ UserSchema.pre<IUser>("save", function(next: any) {
     bcrypt.genSalt(SALT_FACTOR, function(err: any, salt: any) {
       if (err) { return next(err); }
 
-      bcrypt.hash(user.password, salt, null, function(err: any, hash: any) {
+      // Modified this from Silber original because expected 3 args not 4 in new bcrypt
+      // Silber was using an old version that is deprecated
+      bcrypt.hash(user.password, salt, function(err: any, hash: any) {
         if (err) { return next(err); }
         user.password = hash;
         next();
@@ -80,20 +84,37 @@ UserSchema.pre<IUser>("save", function(next: any) {
     });
   });
 
+  /* // Commented this out because the function did not match how Silber did it in his Github
+     // Trying my own approach
 UserSchema.method("comparePassword", function(password: string): boolean {
   if (bcrypt.compareSync(password, this.password)) { return true; }
   return false;
 });
+*/
 
+// Essentially an exact copy of Silber's implementation
+UserSchema.methods.comparePassword = function(candidatePassword: any, cb: any) {
+  if (this.password === "*") {cb(null, false); return; }
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if (err) { return cb(err); }
+
+    cb(null, isMatch);
+  });
+};
+
+// Edited to match our schema and also Silbers code
 UserSchema.methods.toJson = function() {
   return {
+    _id: this._id,
     username: this.username,
     password: this.password,
     email: this.email,
     firstName: this.firstName,
     lastName: this.lasName,
-    about: this.about
+    about: this.about,
+    role: this.role,
+    // provider: this.provider
   };
 };
 
-export default mongoose.model<IUser>("User", UserSchema, "users");
+export const UserModel = mongoose.model<IUser>("User", UserSchema, "users");

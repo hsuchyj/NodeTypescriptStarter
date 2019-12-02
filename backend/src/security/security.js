@@ -3,6 +3,7 @@ User = require('../models/userModel'),
 exports.roles = {
     REQUIRE_ADMIN : "Admin",
     REQUIRE_OWNER : "Owner",
+    REQUIRE_CLIENT : "Client",
     REQUIRE_MEMBER : "Member"};
 
 //=========================================
