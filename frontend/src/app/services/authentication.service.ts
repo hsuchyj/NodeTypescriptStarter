@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IUser, UserModel as User } from "../../../../backend/src/models/userModel";
+import { IUser, UserModel as User } from '../../../../backend/src/models/userModel';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<IUser>; //
@@ -22,7 +22,7 @@ export class AuthenticationService {
 
     // Login method that takes an email and password and pings the API
     login(email, password) {
-        return this.http.post<any>(`localhost:3000/api/login`, { email, password })
+        return this.http.post<any>(`http://localhost:3000/api/login`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 // This allows the user to stay logged in between browser sessions. Can be modified if we like
