@@ -18,7 +18,7 @@ export class ApiRouter {
 
         // We don't need this endpoint anymore because we have a registration endpoint
         // However I will leave it for now
-        this.router.post("/users", this.controller.createUser); //unprotected
+        this.router.post("/users", this.controller.createUser); // unprotected
         this.router.get("/users/:id", this.passportService.requireAuth, this.controller.readUser); // protected
 
         // Right now any authorized user can update the details of any user from this endpoint with their token
@@ -38,23 +38,23 @@ export class ApiRouter {
         this.router.post("/login", this.authentication.login); // unprotected
 
         // restaurant endpoints
-        this.router.post("/restaurants", this.passportService.requireAuth, this.controller.createRestaurant); // protected
+        this.router.post("/restaurants", this.passportService.requireAuth, this.controller.createRestaurant); 
         this.router.get("/restaurants/:id", this.controller.getRestaurant); // unprotected
         this.router.get("/restaurants/all/all", this.controller.getAllRestaurants); // unprotected
 
         // Same issue present here as above with user endpoints. Any authorized user can delete or update any restaurant
-        // Ideally we would want to check if the user passing the token in is actually the user who created the restaurant
-        this.router.delete("/restaurants/:id", this.passportService.requireAuth, this.controller.deleteRestaurant); //protected
-        this.router.put("/restaurants/:id", this.passportService.requireAuth, this.controller.updateRestaurant); // protected
+        // Ideally we would want to check if the user passing the token in is actually the user who created
+        this.router.delete("/restaurants/:id", this.passportService.requireAuth, this.controller.deleteRestaurant); 
+        this.router.put("/restaurants/:id", this.passportService.requireAuth, this.controller.updateRestaurant); 
 
         // review endpoints
-        this.router.post("/reviews/:id", this.passportService.requireAuth, this.controller.createReview); // restaurant id + protected
+        this.router.post("/reviews/:id", this.passportService.requireAuth, this.controller.createReview); 
         this.router.get("/reviews/:id", this.controller.getReview);  // restaurant id, rev id (creator id) + unprotected
 
         // Same issue present here as above with user endpoints. Any authorized user can delete or update any review
         // Ideally we would want to check if the user passing the token in is actually the user who created the review
-        this.router.delete("/reviews/:id", this.passportService.requireAuth, this.controller.deleteReview); // rest id, rev id (creator id) + protected
-        this.router.put("/reviews/:id", this.passportService.requireAuth, this.controller.updateReview); // rest id, rev id (creator id) + protected
+        this.router.delete("/reviews/:id", this.passportService.requireAuth, this.controller.deleteReview); 
+        this.router.put("/reviews/:id", this.passportService.requireAuth, this.controller.updateReview); 
 
         this.router.get("/hello", this.controller.getHello);
         this.router.post("/hello", this.controller.postJello);
