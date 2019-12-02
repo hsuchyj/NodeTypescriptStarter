@@ -6,6 +6,7 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'user', component: ProfileComponent},
   {path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
