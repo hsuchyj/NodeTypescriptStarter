@@ -2,7 +2,12 @@
     <div class="col-md-7">
         <app-restaurant-list></app-restaurant-list>
     </div>
-    <div class="col-md-5">
-        <app-restaurant-reviews-list></app-restaurant-reviews-list>
+    <div class="col-md-auto">
+        <app-restaurant-reviews-list
+        *ngIf="selectedRestaurant; else infoText"
+        [restaurant]="selectedRestaurant"></app-restaurant-reviews-list>
+        <ng-template #infoText>
+            <p>Please select a restaurant!</p>
+        </ng-template>
     </div>
 </div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Restaurant } from '../../restaurant.model';
+import { RestaurantService } from '../../restaurant.service';
 
 @Component({
   selector: 'app-restaurant-item',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() restaurant: Restaurant;
+  @Input() index: string;
+  constructor(private restaurantService: RestaurantService){
+  }
 
   ngOnInit() {
+  }
+
+  onSelected() {
+    this.restaurantService.restaurantSelected.emit(this.restaurant);
   }
 
 }
