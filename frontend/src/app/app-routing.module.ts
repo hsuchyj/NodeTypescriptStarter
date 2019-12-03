@@ -12,6 +12,7 @@ import { ReviewsResolver } from './restaurants/restaurant-reviews-list/reviews-r
 import { LoginActivate } from './auth.guard';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [LoginActivate]},
