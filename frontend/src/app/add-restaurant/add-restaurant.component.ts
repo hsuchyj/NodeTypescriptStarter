@@ -6,8 +6,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { AlertService } from '../services/alert.service';
 import { UserService } from '../services/user.service';
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'add-restaurant.component.html' })
+export class AddRestaurantComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;

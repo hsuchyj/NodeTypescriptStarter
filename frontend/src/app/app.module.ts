@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './error.interceptor';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { ErrorInterceptor } from './error.interceptor';
     ReviewsComponent,
     RestaurantReviewsListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddRestaurantComponent
   ],
   imports: [
     BrowserModule,
