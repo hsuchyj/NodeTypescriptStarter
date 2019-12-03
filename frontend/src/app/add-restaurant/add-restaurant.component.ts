@@ -19,20 +19,36 @@ export class RegisterComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService
     ) {
-        // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
+        // redirect to login if not authenticated
+        if (!this.authenticationService.currentUserValue) {
+            this.router.navigate(['/login']);
         }
     }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(8)]],
-            about: ['', [Validators.required, Validators.maxLength(255)]]
+            alias: ['', Validators.required],
+            name: ['', Validators.required],
+            image_url: [''],
+            review_count: [0],
+            categories: this.formBuilder.group({
+                alias: [''],
+                title: ['', Validators.required]
+            }),
+            transactions: ['', Validators.required],
+            rating: [0],
+            coordinates: this.formBuilder.group({
+                latitude: [39.6831160056787],
+                longitude: [-75.7462319320131]
+            }),
+            location: this.formBuilder.group({
+                display_address: this.formBuilder.group({
+                    address1: ['', Validators.required],
+                    address2: ['', Validators.required]
+                })
+            }),
+            phone: ['+15555555555'],
+            display_phone: ['', Validators.required]
         });
     }
 
@@ -51,12 +67,15 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
+
+
+
+        this.userService.addRestaurant(this.registerForm.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
+                    this.alertService.success('Restaurant added successfully', true);
+                    this.router.navigate(['/restaurants']);
                 },
                 error => {
                     this.alertService.error(error);

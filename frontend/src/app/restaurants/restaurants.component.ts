@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from './restaurant.service';
+import { Restaurant } from './restaurant.model';
+import { Review } from './restaurant-reviews-list/reviews/review.model';
 
 @Component({
   selector: 'app-restaurants',
@@ -9,9 +11,26 @@ import { RestaurantService } from './restaurant.service';
 })
 export class RestaurantsComponent implements OnInit {
 
-  constructor() { }
+  selectedRestaurant: Restaurant;
+
+  constructor(private restaurantService: RestaurantService) { }
 
   ngOnInit() {
+    this.restaurantService.restaurantSelected.subscribe(
+      (restaurant: Restaurant) => {
+        this.selectedRestaurant = restaurant;
+      }
+    );
+  }
+
+  getReviews(): Review[] {
+    let result: Review[];
+    this.restaurantService.getReviews().forEach( value => {
+      if (this.selectedRestaurant.alias === value.alias) {
+        result = value.reviews;
+      }
+    });
+    return result;
   }
 
 }

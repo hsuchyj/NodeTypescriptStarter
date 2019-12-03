@@ -25,7 +25,7 @@ function generateToken(user: any) {
 // Login Route
 // =================================
 exports.login = function(req: express.Request, res: express.Response, next: any) {
-    User.findOne({ email: req.body.email, username: req.body.username }, function(err: any, user: any) {
+    User.findOne({ email: req.body.email }, function(err: any, user: any) {
         if (err) { return res.status(400).json({ error: "bad data" }); }
         if (!user) { return res.status(400).json({ error: "Your login details could not be verified." }); }
         user.comparePassword(req.body.password, function(err: any, isMatch: boolean) {

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,8 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { AboutComponent } from './views/about/about.component';
 import { MenuComponent } from './navigation/menu/menu.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ProfileComponent} from './views/profile/profile.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { SidebarComponent } from './navigation/sidebar/sidebar.component';
 
 import { RestaurantsComponent } from './restaurants/restaurants.component';
@@ -21,6 +20,7 @@ import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorInterceptor } from './error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +45,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

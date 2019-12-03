@@ -1,1 +1,45 @@
-<p>restaurant-item works!</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<a
+  style="cursor: pointer;"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+  (click)="onSelected()"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ restaurant.name }}</h4>
+    <p class="list-group-item-text">{{ restaurant.description }}</p>
+  </div>
+  <span class="pull-right">
+    <img
+      [src]="restaurant.image_url"
+      alt="{{ restaurant.name }}"
+      class="img-responsive"
+      style="max-height: 100px;"
+    />
+  </span>
+
+  <h3>Rating:</h3>
+  <p>{{ restaurant.rating }}</p>
+  <h3>Categories:</h3>
+  <p *ngFor="let cat of restaurant.categories">{{ cat.title }}</p>
+  <h3>Transactions:</h3>
+  <p *ngFor="let t of restaurant.transactions">{{ t }}</p>
+  <h3>Coordinates:</h3>
+  <p>{{ restaurant.coordinates.latitude }}, {{ restaurant.coordinates.longitude }}</p>
+
+  <h3>Address</h3>
+  <p *ngFor="let s of restaurant.location.display_address">{{ s }}</p>
+  <h3>Display Number</h3>
+  <p>{{ restaurant.display_phone }}</p>
+</a>
