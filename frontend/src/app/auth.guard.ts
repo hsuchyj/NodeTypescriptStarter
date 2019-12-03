@@ -14,9 +14,18 @@ export class LoginActivate implements CanActivate {
   ): Observable<boolean>|Promise<boolean>|boolean {
 
     const currentUser = this.authService.currentUserValue;
+    const url: string = route.url.join('');
 
     if (currentUser) {
-      return true;
+      //return true;
+
+      console.log(url);
+
+      if (url === 'login' || url === 'register'){
+          this.router.navigate(['/home']);
+      } else {
+          return true;
+      }
     }
     this.router.navigate(['/login']);
   }
