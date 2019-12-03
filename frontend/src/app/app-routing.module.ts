@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'user', component: ProfileComponent},
   { path: 'restaurants',
     component: RestaurantsComponent,
+    canActivate: [LoginActivate],
     resolve: { restaurants: RestaurantResolver, reviews: ReviewsResolver },
     children: [
     { path: ':id', component: RestaurantReviewsListComponent }
