@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from './restaurant.service';
 import { Restaurant } from './restaurant.model';
+import { Review } from './restaurant-reviews-list/reviews/review.model';
 
 @Component({
   selector: 'app-restaurants',
@@ -20,6 +21,16 @@ export class RestaurantsComponent implements OnInit {
         this.selectedRestaurant = restaurant;
       }
     );
+  }
+
+  getReviews(): Review[] {
+    let result: Review[];
+    this.restaurantService.getReviews().forEach( value => {
+      if (this.selectedRestaurant.alias === value.alias) {
+        result = value.reviews;
+      }
+    });
+    return result;
   }
 
 }

@@ -1,12 +1,12 @@
 import { Restaurant } from './restaurant.model';
 import { Injectable, EventEmitter } from '@angular/core';
-import { Review } from './restaurant-reviews-list/review.model';
+import { RestaurantReview } from './restaurant-reviews-list/restaurant-reviews.model';
 
 @Injectable({providedIn: 'root'})
 export class RestaurantService {
 
     private restaurants: Restaurant[];
-    private reviews: Review[];
+    private reviews: any[];
 
     restaurantSelected = new EventEmitter<Restaurant>();
 
@@ -23,4 +23,13 @@ export class RestaurantService {
     setRestaurants(restaurants: Restaurant[]) {
         this.restaurants = restaurants;
     }
+
+    setReviews(reviews: RestaurantReview[]) {
+        this.reviews = reviews;
+    }
+
+    getReviews() {
+        return this.reviews;
+    }
+
 }

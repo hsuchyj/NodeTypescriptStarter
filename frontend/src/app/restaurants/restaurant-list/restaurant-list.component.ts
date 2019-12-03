@@ -16,8 +16,8 @@ export class RestaurantListComponent implements OnInit {
   constructor(private actr: ActivatedRoute, private restaurantService: RestaurantService) {
     this.actr.data
     .subscribe( res => {
-      this.restaurants = res.cres;
-      this.restaurantService.setRestaurants(res.cres);
+      this.restaurants = res.restaurants;
+      this.restaurantService.setRestaurants(res.restaurants);
     });
   }
 

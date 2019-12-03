@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Review } from './review.model';
 import { Restaurant } from '../restaurant.model';
+import { ActivatedRoute } from '@angular/router';
+import { RestaurantService } from '../restaurant.service';
+import { Review } from './reviews/review.model';
 
 @Component({
   selector: 'app-restaurant-reviews-list',
@@ -10,19 +12,14 @@ import { Restaurant } from '../restaurant.model';
 export class RestaurantReviewsListComponent implements OnInit {
 
   @Input() restaurant: Restaurant;
+  @Input() reviews: Review[];
 
-  reviews: Review[] = [ new Review('userID', new Date(), 'good stuff', {
-    overall: 4,
-    food: 4,
-    drinksAndBar: 2,
-    price: 3,
-    service: 4,
-    specialsAndHappyHour: 2,
-    music: 3,
-    restrooms: 3
-  })];
-
-  constructor() { }
+  constructor(private actr: ActivatedRoute, private restaurantService: RestaurantService) {
+    this.actr.data
+    .subscribe( res => {
+      this.restaurantService.setReviews(res.reviews);
+    });
+  }
 
   ngOnInit() {
   }

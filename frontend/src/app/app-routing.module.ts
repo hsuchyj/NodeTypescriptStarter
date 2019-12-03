@@ -8,14 +8,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver.service';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
+import { ReviewsResolver } from './restaurants/restaurant-reviews-list/reviews-resolver.service';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'about', component: AboutComponent},
   { path: 'user', component: ProfileComponent},
-  { path: 'restaurants', component: RestaurantsComponent, resolve: { cres: RestaurantResolver }, children: [
+  { path: 'restaurants',
+    component: RestaurantsComponent,
+    resolve: { restaurants: RestaurantResolver, reviews: ReviewsResolver },
+    children: [
     { path: ':id', component: RestaurantReviewsListComponent }
   ]},
   {path: 'login', component: LoginComponent},

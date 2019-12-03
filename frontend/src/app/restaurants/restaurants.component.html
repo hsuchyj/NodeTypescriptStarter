@@ -5,7 +5,8 @@
     <div class="col-md-auto">
         <app-restaurant-reviews-list
         *ngIf="selectedRestaurant; else infoText"
-        [restaurant]="selectedRestaurant"></app-restaurant-reviews-list>
+        [restaurant]="selectedRestaurant"
+        [reviews]="getReviews()"></app-restaurant-reviews-list>
         <ng-template #infoText>
             <p>Please select a restaurant!</p>
         </ng-template>
