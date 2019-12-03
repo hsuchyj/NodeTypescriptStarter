@@ -8,13 +8,6 @@ import Review, { IReview } from "./models/reviewModel";
 import { fstat } from "fs";
 
 export class Controller {
-    
-    public getHello(req: express.Request, res: express.Response): void {
-        res.send("Hello World");
-    }
-    public postJello(req: express.Request, res: express.Response): void {
-        res.send(req.body);
-    }
 
     public setupDb(): void {
         // username:password
@@ -241,6 +234,16 @@ export class Controller {
                     res.send("Review updated");
                 }
             });
+    }
+
+    public getAllReviews(req: express.Request, res: express.Response): void {
+        Review.find( {} , (err, model) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(model);
+            }
+        });
     }
 
 }
