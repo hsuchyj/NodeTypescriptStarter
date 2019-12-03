@@ -1,1 +1,26 @@
-<p>{{ review.text }}</p>
+<div class="list-group-item">
+  <h4>Creator Id</h4>
+  <p>{{ review.creatorId }}</p>
+  <h4>Timestamp</h4>
+  <p>{{ review.timestamp }}</p>
+  <h4>Text</h4>
+  <p>{{ review.text }}</p>
+
+  <h3>Ratings:</h3>
+  <h5>Overall:</h5>
+  <p>{{ review.ratings.overall }}</p>
+  <h5>Food:</h5>
+  <p>{{ review.ratings.food }}</p>
+  <h5>Drinks and Bar:</h5>
+  <p>{{ review.ratings.drinksAndBar }}</p>
+  <h5>Price:</h5>
+  <p>{{ review.ratings.price }}</p>
+  <h5>Service:</h5>
+  <p>{{ review.ratings.service }}</p>
+  <h5>Specials and Happy Hour:</h5>
+  <p>{{ review.ratings.specialsAndHappyHour }}</p>
+  <h5>Music:</h5>
+  <p>{{ review.ratings.music }}</p>
+  <h5>Restrooms:</h5>
+  <p>{{ review.ratings.restrooms }}</p>
+</div>
