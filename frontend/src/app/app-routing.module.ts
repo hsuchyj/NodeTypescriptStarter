@@ -9,12 +9,13 @@ import { RegisterComponent } from './register/register.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver.service';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
 import { ReviewsResolver } from './restaurants/restaurant-reviews-list/reviews-resolver.service';
+import { LoginActivate } from './auth.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
-  { path: 'about', component: AboutComponent},
+  { path: 'home', component: HomeComponent, canActivate: [LoginActivate]},
+  { path: 'about', component: AboutComponent, canActivate: [LoginActivate]},
   { path: 'user', component: ProfileComponent},
   { path: 'restaurants',
     component: RestaurantsComponent,
@@ -29,6 +30,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [RestaurantResolver]
+  providers: [RestaurantResolver, LoginActivate]
 })
 export class AppRoutingModule { }
