@@ -10,6 +10,7 @@ import { RestaurantResolver } from './restaurants/restaurant-resolver.service';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
 import { ReviewsResolver } from './restaurants/restaurant-reviews-list/reviews-resolver.service';
 import { LoginActivate } from './auth.guard';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 
 
 
@@ -23,10 +24,11 @@ const routes: Routes = [
     canActivate: [LoginActivate],
     resolve: { restaurants: RestaurantResolver, reviews: ReviewsResolver },
     children: [
-    { path: ':id', component: RestaurantReviewsListComponent }
+    { path: ':id', component: RestaurantReviewsListComponent },
   ]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'add-restaurant', component: AddRestaurantComponent}
 ];
 
 @NgModule({

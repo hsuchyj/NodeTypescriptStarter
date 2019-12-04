@@ -11,10 +11,10 @@
 
 </head>
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-4">
         <app-restaurant-list></app-restaurant-list>
     </div>
-    <div class="col-md-auto">
+    <div class="col-md-8">
         <app-restaurant-reviews-list
         *ngIf="selectedRestaurant; else infoText"
         [restaurant]="selectedRestaurant"
