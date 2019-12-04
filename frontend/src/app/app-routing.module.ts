@@ -9,26 +9,31 @@ import { RegisterComponent } from './register/register.component';
 import { RestaurantResolver } from './restaurants/restaurant-resolver.service';
 import { RestaurantReviewsListComponent } from './restaurants/restaurant-reviews-list/restaurant-reviews-list.component';
 import { ReviewsResolver } from './restaurants/restaurant-reviews-list/reviews-resolver.service';
+import { LoginActivate } from './auth.guard';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
+
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'home', component: HomeComponent},
-  { path: 'about', component: AboutComponent},
+  { path: 'home', component: HomeComponent, canActivate: [LoginActivate]},
+  { path: 'about', component: AboutComponent, canActivate: [LoginActivate]},
   { path: 'user', component: ProfileComponent},
   { path: 'restaurants',
     component: RestaurantsComponent,
+    canActivate: [LoginActivate],
     resolve: { restaurants: RestaurantResolver, reviews: ReviewsResolver },
     children: [
     { path: ':id', component: RestaurantReviewsListComponent },
   ]},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'add-restaurant', component: AddRestaurantComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [RestaurantResolver]
+  providers: [RestaurantResolver, LoginActivate]
 })
 export class AppRoutingModule { }

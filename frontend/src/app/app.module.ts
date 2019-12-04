@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './error.interceptor';
 import { NewReviewComponent } from './restaurants/restaurant-reviews-list/new-review/new-review.component';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { NewReviewComponent } from './restaurants/restaurant-reviews-list/new-re
     LoginComponent,
     RegisterComponent,
     NewReviewComponent
+    AddRestaurantComponent
   ],
   imports: [
     BrowserModule,
