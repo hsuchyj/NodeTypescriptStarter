@@ -22,6 +22,7 @@ export class RestaurantItemComponent implements OnInit {
   }
 
   onReviewsButton() {
+    this.restaurantService.open();
     window.scrollTo(0, 0);
   }
 

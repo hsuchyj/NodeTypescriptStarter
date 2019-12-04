@@ -9,10 +9,19 @@ export class RestaurantService {
 
     private restaurants: Restaurant[];
     private reviews: any[];
+    public isClosed: boolean = false;
 
     restaurantSelected = new EventEmitter<Restaurant>();
 
     constructor(private http: HttpClient) {}
+
+    close() {
+        this.isClosed = true;
+    }
+
+    open() {
+        this.isClosed = false;
+    }
 
     getRestaurant(alias: string): Restaurant {
         let result: Restaurant;
