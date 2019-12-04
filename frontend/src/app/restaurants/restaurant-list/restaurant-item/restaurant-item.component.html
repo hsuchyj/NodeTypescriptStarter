@@ -1,45 +1,77 @@
+<!--
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
-<a
-  style="cursor: pointer;"
-  [routerLink]="[index]"
-  routerLinkActive="active"
-  class="list-group-item clearfix"
-  (click)="onSelected()"
->
-  <div class="pull-left">
-    <h4 class="list-group-item-heading">{{ restaurant.name }}</h4>
-    <p class="list-group-item-text">{{ restaurant.description }}</p>
-  </div>
-  <span class="pull-right">
-    <img
-      [src]="restaurant.image_url"
-      alt="{{ restaurant.name }}"
-      class="img-responsive"
-      style="max-height: 100px;"
-    />
-  </span>
+-->
 
-  <h3>Rating:</h3>
-  <p>{{ restaurant.rating }}</p>
-  <h3>Categories:</h3>
-  <p *ngFor="let cat of restaurant.categories">{{ cat.title }}</p>
-  <h3>Transactions:</h3>
-  <p *ngFor="let t of restaurant.transactions">{{ t }}</p>
-  <h3>Coordinates:</h3>
-  <p>{{ restaurant.coordinates.latitude }}, {{ restaurant.coordinates.longitude }}</p>
+<!-- 
+<div class="wrapper">
 
-  <h3>Address</h3>
-  <p *ngFor="let s of restaurant.location.display_address">{{ s }}</p>
-  <h3>Display Number</h3>
-  <p>{{ restaurant.display_phone }}</p>
-</a>
+  Bootstrap Reference
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <a style="cursor: pointer;" [routerLink]="[index]" routerLinkActive="active" class="list-group-item clearfix"
+    (click)="onSelected()">
+    <div class="pull-left">
+      <h2 class="list-group-item-heading">{{ restaurant.name }}</h2>
+      <p class="list-group-item-text">{{ restaurant.description }}</p>
+    </div>
+    <span class="pull-right">
+      <img [src]="restaurant.image_url" alt="{{ restaurant.name }}" class="img-responsive" style="max-height: 100px;" />
+    </span>
+
+    <div id="rating">
+      <h4>Rating:</h4>
+      <p>{{ restaurant.rating }}/5</p>
+    </div>
+
+    <div id="categories">
+      <h4>Categories:</h4>
+      <ul id="category-list">
+        <li *ngFor="let cat of restaurant.categories">{{ cat.title }}</li>
+      </ul>
+    </div>
+
+    <h4>Transactions:</h4>
+    <p *ngFor="let t of restaurant.transactions">{{ t }}</p>
+    <h4>Coordinates:</h4>
+    <p>{{ restaurant.coordinates.latitude }}, {{ restaurant.coordinates.longitude }}</p>
+
+    <h4>Address</h4>
+    <p *ngFor="let s of restaurant.location.display_address">{{ s }}</p>
+    <h3>Display Number</h3>
+    <p>{{ restaurant.display_phone }}</p>
+  </a>
+</div>
+-->
+
+<div class="wrapper">
+  <mat-card [routerLink]="[index]" routerLinkActive="active" (click)="onSelected()" class="card">
+    <div class="wrap-content">
+      <mat-card-title id="name">{{ restaurant.name }}</mat-card-title>
+      <mat-card-content id="rate">
+        <h5 id="rating">Rating</h5>
+        <p>{{ restaurant.rating }}/5</p>
+      </mat-card-content>
+      <mat-card-content id="image">
+        <img [src]="restaurant.image_url" alt="{{ restaurant.name }}" class="img-responsive"
+          style="max-height: 100px;" />
+      </mat-card-content>
+      <mat-card-content id="cat">
+        <h5 id="categories">Categories</h5>
+        <ul id="category-list" class="list-inline">
+          <li class="list-inline-item" *ngFor="let cat of restaurant.categories">{{ cat.title }}</li>
+        </ul>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

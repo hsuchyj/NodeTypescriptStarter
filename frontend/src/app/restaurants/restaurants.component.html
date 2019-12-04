@@ -1,11 +1,12 @@
+<!-- 
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
@@ -21,5 +22,22 @@
         <ng-template #infoText>
             <p>Please select a restaurant!</p>
         </ng-template>
+    </div>
+</div>
+-->
+
+<div class="wrapper">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <div class="row">
+        <div class="col-md-7">
+            <app-restaurant-list></app-restaurant-list>
+        </div>
+        <div class="col-md-auto">
+            <app-restaurant-reviews-list *ngIf="selectedRestaurant; else infoText" [restaurant]="selectedRestaurant"
+                [reviews]="getReviews()"></app-restaurant-reviews-list>
+            <ng-template #infoText>
+                <p>Please select a restaurant!</p>
+            </ng-template>
+        </div>
     </div>
 </div>

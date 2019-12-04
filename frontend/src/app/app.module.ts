@@ -21,6 +21,16 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './error.interceptor';
+
+//import Angular material things
+import {
+  MatToolbarModule,
+  MatMenuModule,
+  MatCardModule,
+  MatButtonModule,
+  MatIconModule
+} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +53,19 @@ import { ErrorInterceptor } from './error.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
+  ],
+  exports: [
+    MatToolbarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
