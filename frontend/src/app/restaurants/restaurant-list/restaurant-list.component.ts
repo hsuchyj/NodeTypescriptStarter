@@ -12,9 +12,9 @@ import { RestaurantService } from '../restaurant.service';
 export class RestaurantListComponent implements OnInit {
 
   restaurants: Restaurant[];
-  centerColumn: Restaurant[] = [];
   leftColumn: Restaurant[] = [];
   rightColumn: Restaurant[] = [];
+  centerColumn: Restaurant[] = [];
 
   constructor(private actr: ActivatedRoute, private restaurantService: RestaurantService) {
     this.actr.data

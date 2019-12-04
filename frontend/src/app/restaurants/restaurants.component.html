@@ -43,6 +43,31 @@
     </div>
     -->
 
+    <div class="row">
+        <div class="col-sm-4">
+            <app-restaurant-reviews-list *ngIf="selectedRestaurant; else addButton" [restaurant]="selectedRestaurant"
+                [reviews]="getReviews()"></app-restaurant-reviews-list>
+            <ng-template #addButton>
+                <button mat-raised-button class="addButton" routerLink='/addRestaurant'>Add a new Restaurant</button>
+            </ng-template>
+        </div>
+        <div class="col-auto">
+            <app-restaurant-list></app-restaurant-list>
+        </div>
+    </div>
+
+    <!--<div class="row">
+        <div class="col-auto" display="inline">
+            <p>Hello</p>
+        </div>
+        <div class="col-auto" display="inline">
+            <p>World</p>
+        </div>
+    </div>-->
+    
+    
+    <!--
     <app-restaurant-list></app-restaurant-list>
+    -->
 
 </div>
