@@ -1,6 +1,5 @@
 import { Document, Schema } from "mongoose";
-import * as mongoose from "mongoose"; 
-
+import * as mongoose from "mongoose";
 export interface IRestaurant extends Document {
   alias: string;  
   name: string;

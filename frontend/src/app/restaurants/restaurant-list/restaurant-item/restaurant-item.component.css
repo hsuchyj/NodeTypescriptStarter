@@ -1,0 +1,10 @@
+.card {
+    background-color: #1976d2;
+    color: white;
+    box-shadow: 7px 7px 9px #565656;
+}
+
+.content-text {
+    text-decoration: underline;
+    text-decoration-color: white;
+}

@@ -6,8 +6,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { AlertService } from '../services/alert.service';
 import { UserService } from '../services/user.service';
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'add-restaurant.component.html' })
+export class AddRestaurantComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
@@ -31,22 +31,19 @@ export class RegisterComponent implements OnInit {
             name: ['', Validators.required],
             image_url: [''],
             review_count: [0],
-            categories: this.formBuilder.group({
-                alias: [''],
-                title: ['', Validators.required]
-            }),
+            categories:  {
+                alias: 'pizza',
+                title: 'Pizza'
+            },
             transactions: ['', Validators.required],
             rating: [0],
-            coordinates: this.formBuilder.group({
+            coordinates: {
                 latitude: [39.6831160056787],
                 longitude: [-75.7462319320131]
-            }),
-            location: this.formBuilder.group({
-                display_address: this.formBuilder.group({
-                    address1: ['', Validators.required],
-                    address2: ['', Validators.required]
-                })
-            }),
+            },
+            location: {
+                display_address: ['120 East Main Street', 'Newark, DE 19711']
+            },
             phone: ['+15555555555'],
             display_phone: ['', Validators.required]
         });

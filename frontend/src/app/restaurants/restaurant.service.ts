@@ -1,6 +1,8 @@
 import { Restaurant } from './restaurant.model';
 import { Injectable, EventEmitter } from '@angular/core';
 import { RestaurantReview } from './restaurant-reviews-list/restaurant-reviews.model';
+import { HttpClient } from '@angular/common/http';
+import { Review } from './restaurant-reviews-list/reviews/review.model';
 
 @Injectable({providedIn: 'root'})
 export class RestaurantService {
@@ -9,6 +11,8 @@ export class RestaurantService {
     private reviews: any[];
 
     restaurantSelected = new EventEmitter<Restaurant>();
+
+    constructor(private http: HttpClient) {}
 
     getRestaurant(alias: string): Restaurant {
         let result: Restaurant;
@@ -30,6 +34,23 @@ export class RestaurantService {
 
     getReviews() {
         return this.reviews;
+    }
+
+    addReview(review: Review, restaurantId: string, token: string) {
+        this.http.post('http://localhost:3000/api/reviews/' + restaurantId, {
+            creatorId: review.creatorId,
+            text: review.text,
+            ratings: review.ratings
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token
+            }
+        }).subscribe(
+            () => {
+                alert('review added');
+            }
+        );
     }
 
 }

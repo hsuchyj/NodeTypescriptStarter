@@ -1,26 +1,50 @@
 <div class="list-group-item">
-  <h4>Creator Id</h4>
-  <p>{{ review.creatorId }}</p>
-  <h4>Timestamp</h4>
-  <p>{{ review.timestamp }}</p>
-  <h4>Text</h4>
+  <h6><u>Review:</u></h6>
   <p>{{ review.text }}</p>
+  <p>Written by: {{ review.creatorId }}</p>
+  <p>{{ review.timestamp }}</p>
 
-  <h3>Ratings:</h3>
-  <h5>Overall:</h5>
-  <p>{{ review.ratings.overall }}</p>
-  <h5>Food:</h5>
-  <p>{{ review.ratings.food }}</p>
-  <h5>Drinks and Bar:</h5>
-  <p>{{ review.ratings.drinksAndBar }}</p>
-  <h5>Price:</h5>
-  <p>{{ review.ratings.price }}</p>
-  <h5>Service:</h5>
-  <p>{{ review.ratings.service }}</p>
-  <h5>Specials and Happy Hour:</h5>
-  <p>{{ review.ratings.specialsAndHappyHour }}</p>
-  <h5>Music:</h5>
-  <p>{{ review.ratings.music }}</p>
-  <h5>Restrooms:</h5>
-  <p>{{ review.ratings.restrooms }}</p>
+  <h6>Ratings:</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Overall:</th>
+        <td>{{ review.ratings.overall }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Food:</th>
+        <td>{{ review.ratings.food }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Drinks and Bar:</th>
+        <td>{{ review.ratings.drinksAndBar }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Price:</th>
+        <td>{{ review.ratings.price }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Service:</th>
+        <td>{{ review.ratings.service }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Specials and Happy Hour:</th>
+        <td>{{ review.ratings.specialsAndHappyHour }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Music:</th>
+        <td>{{ review.ratings.music }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Restrooms:</th>
+        <td>{{ review.ratings.restrooms }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
