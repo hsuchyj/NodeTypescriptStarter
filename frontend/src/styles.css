@@ -3,11 +3,16 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body {
-    margin: 0px;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 html {
     font-family: Roboto, sans-serif, Helvetica;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 mat-card {
