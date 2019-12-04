@@ -31,22 +31,22 @@ export class AddRestaurantComponent implements OnInit {
             name: ['', Validators.required],
             image_url: [''],
             review_count: [0],
-            categories: this.formBuilder.group({
-                alias: [''],
-                title: ['', Validators.required]
-            }),
+            categories:  {
+                alias: ['pizza'],
+                title: ['Pizza']
+            },
             transactions: ['', Validators.required],
             rating: [0],
-            coordinates: this.formBuilder.group({
+            coordinates: {
                 latitude: [39.6831160056787],
                 longitude: [-75.7462319320131]
-            }),
-            location: this.formBuilder.group({
-                display_address: this.formBuilder.group({
-                    address1: ['', Validators.required],
-                    address2: ['', Validators.required]
-                })
-            }),
+            },
+            location: {
+                display_address: {
+                    address1: ['120 East Main Street'],
+                    address2: ['Newark, DE 19711']
+                }
+            },
             phone: ['+15555555555'],
             display_phone: ['', Validators.required]
         });

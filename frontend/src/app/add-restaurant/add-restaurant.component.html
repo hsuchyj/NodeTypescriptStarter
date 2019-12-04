@@ -31,35 +31,12 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="title">Cuisine Type</label>
-        <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
-        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-            <div *ngIf="f.title.errors.required">Cuisine Type is required</div>
-        </div>
-    </div>
-    <div class="form-group">
         <label for="transactions">Pickup or Delivery?</label>
         <input type="text" formControlName="transactions" placeholder="Please enter either pickup or delivery below" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.transactions.errors }" />
         <div *ngIf="submitted && f.transactions.errors" class="invalid-feedback">
             <div *ngIf="f.transactions.errors.required">Choice of Pickup or Delivery is required</div>
         </div>
     </div>
-    <form [formGroup]="display_address">
-        <div class="form-group">
-            <label for="address1">Street Address</label>
-            <input type="text" formControlName="address1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
-            <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
-                <div *ngIf="f.address1.errors.required">Street Address is required</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="address2">City, State and Zip</label>
-            <input type="address2" formControlName="address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
-            <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
-                <div *ngIf="f.address2.errors.required">City, State and Zip are required</div>
-            </div>
-        </div>
-    </form>
     <div class="form-group">
         <label for="display_phone">Phone Number</label>
         <input type="text" formControlName="display_phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.display_phone.errors }" />
