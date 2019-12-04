@@ -24,4 +24,8 @@ export class RestaurantReviewsListComponent implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+    this.restaurantService.close();
+  }
+
 }

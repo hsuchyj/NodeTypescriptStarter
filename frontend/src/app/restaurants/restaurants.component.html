@@ -45,7 +45,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <app-restaurant-reviews-list *ngIf="selectedRestaurant; else addButton" [restaurant]="selectedRestaurant"
+            <app-restaurant-reviews-list *ngIf="selectedRestaurant && !restaurantService.isClosed; else addButton" [restaurant]="selectedRestaurant"
                 [reviews]="getReviews()"></app-restaurant-reviews-list>
             <ng-template #addButton>
                 <button mat-raised-button class="addButton" routerLink="../add-restaurant">Add a new Restaurant</button>

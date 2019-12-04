@@ -10,5 +10,5 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   currentUser: IUser;
-  title = 'frontend';
+  title = 'UDelp Food Reviews';
 }
