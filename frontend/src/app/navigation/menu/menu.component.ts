@@ -12,17 +12,22 @@ export class MenuComponent implements OnInit {
   currentUser: IUser;
 
   @Input() activeClass='active';
+  loggedIn: boolean;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.authenticationService.currentUser.subscribe(x => {
+      this.currentUser = x;
+      this.loggedIn = true;
+    });
   }
 
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
+    this.loggedIn = false;
   }
 
   ngOnInit() {
