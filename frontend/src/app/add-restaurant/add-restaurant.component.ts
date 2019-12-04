@@ -32,8 +32,8 @@ export class AddRestaurantComponent implements OnInit {
             image_url: [''],
             review_count: [0],
             categories:  {
-                alias: ['pizza'],
-                title: ['Pizza']
+                alias: 'pizza',
+                title: 'Pizza'
             },
             transactions: ['', Validators.required],
             rating: [0],
@@ -42,10 +42,7 @@ export class AddRestaurantComponent implements OnInit {
                 longitude: [-75.7462319320131]
             },
             location: {
-                display_address: {
-                    address1: ['120 East Main Street'],
-                    address2: ['Newark, DE 19711']
-                }
+                display_address: ['120 East Main Street', 'Newark, DE 19711']
             },
             phone: ['+15555555555'],
             display_phone: ['', Validators.required]

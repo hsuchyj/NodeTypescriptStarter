@@ -38,7 +38,7 @@ export class ApiRouter {
         this.router.post("/login", this.authentication.login); // unprotected
 
         // restaurant endpoints
-        this.router.post("/restaurants", this.passportService.requireAuth, this.controller.createRestaurant); 
+        this.router.post("/restaurants", this.controller.createRestaurant); 
         this.router.get("/restaurants/:id", this.controller.getRestaurant); // unprotected
         this.router.get("/restaurants/all/all", this.controller.getAllRestaurants); // unprotected
 
