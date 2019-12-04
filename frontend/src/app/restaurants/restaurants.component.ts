@@ -3,6 +3,7 @@ import { RestaurantService } from './restaurant.service';
 import { Restaurant } from './restaurant.model';
 import { Review } from './restaurant-reviews-list/reviews/review.model';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-restaurants',
@@ -33,6 +34,9 @@ export class RestaurantsComponent implements OnInit {
       }
     });
     return result;
+  }
+
+  hideReviews() {
   }
 
 }

@@ -53,4 +53,8 @@ export class RestaurantService {
         );
     }
 
+    resetSelected(){
+        this.restaurantSelected = null;
+    }
+
 }

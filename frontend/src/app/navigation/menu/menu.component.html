@@ -17,15 +17,15 @@
           >Home</a
         >
       </li>
-      <li class="nav-item">
-        <a
-          [routerLinkActive]="activeClass"
-          class="nav-link"
-          routerLink="restaurants"
-          >Restaurants</a
-        >
+      <li class="nav-item" onclick="resetSelected">
+          <a
+            [routerLinkActive]="activeClass"
+            class="nav-link"
+            routerLink="restaurants">
+              Restaurants
+          </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" onclick="resetSelected">
           <a
             [routerLinkActive]="activeClass"
             class="nav-link"
