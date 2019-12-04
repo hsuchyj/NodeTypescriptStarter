@@ -29,6 +29,7 @@ import {
   MatButtonModule,
   MatIconModule
 } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { NewReviewComponent } from './restaurants/restaurant-reviews-list/new-review/new-review.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
@@ -70,6 +71,9 @@ import { SearchPipe } from './search.pipe.service';
     MatCardModule,
     MatButtonModule,
     MatIconModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
