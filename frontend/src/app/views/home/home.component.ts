@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Load google maps script after view init
     const DSLScript = document.createElement('script');
-    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDhqLhUaa9b_FvOo0uIM_Ao4GUXX2qDhf4'; // replace by your API key
+    DSLScript.src = 'https://maps.googleapis.com/maps/api/js?key=hahanotforu'; // replace by your API key
     DSLScript.type = 'text/javascript';
     document.body.appendChild(DSLScript);
     document.body.removeChild(DSLScript);
