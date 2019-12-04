@@ -29,7 +29,8 @@
   
   <div class="row">
     <div class="col-md-12">
-      <app-restaurant-item *ngFor="let restaurantEl of restaurants;" [restaurant]="restaurantEl"
+      <input [(ngModel)]="query" placeholder="Whatcha lookin' for?">
+      <app-restaurant-item *ngFor="let restaurantEl of restaurants | search:'name':query" [restaurant]="restaurantEl"
         [index]="restaurantEl.alias"></app-restaurant-item>
     </div>
   </div>
