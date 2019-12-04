@@ -32,7 +32,7 @@
         <div class="col-md-7">
             <app-restaurant-list></app-restaurant-list>
         </div>
-        <div class="col-md-auto">
+        <div class="col-md-5">
             <app-restaurant-reviews-list *ngIf="selectedRestaurant; else infoText" [restaurant]="selectedRestaurant"
                 [reviews]="getReviews()"></app-restaurant-reviews-list>
             <ng-template #infoText>
