@@ -1,14 +1,21 @@
+<h1>{{ restaurant.name }}</h1>
 <button class="btn btn-success" (click)="onNewReview()" *ngIf="!newReview">
-    Submit a Review!
+  Submit a Review!
 </button>
-<div class="container-fluid" *ngIf="newReview" >
+<div class="container-fluid" *ngIf="newReview">
   <div class="row">
     <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col">
           <div class="form-group">
             <label for="text" style="font-weight: bold;">Your review:</label>
-            <textarea id="text" class="form-control" rows="3" formControlName="text"></textarea>
+            <textarea
+              id="text"
+              class="form-control"
+              rows="3"
+              formControlName="text"
+              placeholder="How was the restaurant?"
+            ></textarea>
             <hr />
             <div>
               <label for="ratings" style="font-weight: bold;"
@@ -19,11 +26,25 @@
                 <div class="row">
                   <div class="col-xs-6">
                     <label for="overall">Overall: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="overall"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="overall"
+                      placeholder="/5"
+                    />
                   </div>
                   <div class="col-xs-6">
                     <label for="food">Food: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="food"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="food"
+                      placeholder="/5"
+                    />
                   </div>
                 </div>
               </div>
@@ -32,11 +53,25 @@
                 <div class="row">
                   <div class="col-xs-6">
                     <label for="drinksAndBar">Drinks and Bar: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="drinksAndBar"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="drinksAndBar"
+                      placeholder="/5"
+                    />
                   </div>
                   <div class="col-xs-6">
                     <label for="price">Price: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="price"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="price"
+                      placeholder="/5"
+                    />
                   </div>
                 </div>
               </div>
@@ -45,13 +80,27 @@
                 <div class="row">
                   <div class="col-xs-6">
                     <label for="service">Service: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="service"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="service"
+                      placeholder="/5"
+                    />
                   </div>
                   <div class="col-xs-6">
                     <label for="specialsAndHappyHour"
                       >Specials/Happy Hour:
                     </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="specialsAndHappyHour"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="specialsAndHappyHour"
+                      placeholder="/5"
+                    />
                   </div>
                 </div>
               </div>
@@ -60,11 +109,25 @@
                 <div class="row">
                   <div class="col-xs-6">
                     <label for="music">Music: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="music"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="music"
+                      placeholder="/5"
+                    />
                   </div>
                   <div class="col-xs-6">
                     <label for="restrooms">Restrooms: </label>
-                    <input type="number" class="form-control" min="1" max="5" formControlName="restrooms"/>
+                    <input
+                      type="number"
+                      class="form-control"
+                      min="1"
+                      max="5"
+                      formControlName="restrooms"
+                      placeholder="/5"
+                    />
                   </div>
                 </div>
               </div>
@@ -75,8 +138,16 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" class="btn btn-success" [disabled]="!reviewForm.valid">Post</button>
-          <button type="button" class="btn btn-danger" (click)="onNewReview()">Cancel</button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!reviewForm.valid"
+          >
+            Post
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onNewReview()">
+            Cancel
+          </button>
         </div>
       </div>
     </form>

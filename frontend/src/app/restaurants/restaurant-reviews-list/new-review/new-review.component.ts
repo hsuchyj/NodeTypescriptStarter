@@ -12,6 +12,7 @@ export class NewReviewComponent implements OnInit {
 
   reviewForm: FormGroup;
   @Input() restaurantId: string;
+  @Input() restaurant: string;
   newReview: boolean;
 
   constructor(private restaurantService: RestaurantService) {

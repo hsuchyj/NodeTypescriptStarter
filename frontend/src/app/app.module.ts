@@ -37,7 +37,7 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
     RestaurantReviewsListComponent,
     LoginComponent,
     RegisterComponent,
-    NewReviewComponent
+    NewReviewComponent,
     AddRestaurantComponent
   ],
   imports: [
