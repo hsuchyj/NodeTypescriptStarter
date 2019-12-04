@@ -59,7 +59,7 @@
     <div class="wrap-content">
       <mat-card-title id="name">{{ restaurant.name }}</mat-card-title>
       <mat-card-content id="rate">
-        <h5 id="rating">Rating</h5>
+        <h5 id="rating" class="content-text">Rating</h5>
         <p>{{ restaurant.rating }}/5</p>
       </mat-card-content>
       <mat-card-content id="image">
@@ -67,7 +67,7 @@
           style="max-height: 100px;" />
       </mat-card-content>
       <mat-card-content id="cat">
-        <h5 id="categories">Categories</h5>
+        <h5 id="categories" class="content-text">Categories</h5>
         <ul id="category-list" class="list-inline">
           <li class="list-inline-item" *ngFor="let cat of restaurant.categories">{{ cat.title }}</li>
         </ul>
