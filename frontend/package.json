@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@types/googlemaps": "^3.38.1",
+    "googlemaps": "^1.12.0",
     "@types/jquery": "^3.3.31",
     "@types/mongoose": "^5.5.32",
     "angular": "^1.7.9",

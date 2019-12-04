@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend\\src",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\app",
+    "\\frontend\\src\\app\\restaurants",
+    "\\frontend\\src\\app\\restaurants\\restaurant-list",
+    "\\frontend\\src\\app\\restaurants\\restaurant-reviews-list\\reviews"
+  ],
+  "SelectedNode": "\\frontend\\src\\app\\restaurants\\restaurant-list\\restaurant-list.component.ts",
+  "PreviewInSolutionExplorer": false
+}
