@@ -28,11 +28,12 @@
 
 <div class="wrapper">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--
     <div class="row">
         <div class="col-md-7">
             <app-restaurant-list></app-restaurant-list>
         </div>
-        <div class="col-md-auto">
+        <div class="col-md-5">
             <app-restaurant-reviews-list *ngIf="selectedRestaurant; else infoText" [restaurant]="selectedRestaurant"
                 [reviews]="getReviews()"></app-restaurant-reviews-list>
             <ng-template #infoText>
@@ -40,4 +41,28 @@
             </ng-template>
         </div>
     </div>
+    -->
+
+    <div class="row">
+        <div class="col-md-10">
+            <app-restaurant-reviews-list *ngIf="selectedRestaurant; else addButton" [restaurant]="selectedRestaurant"
+                [reviews]="getReviews()"></app-restaurant-reviews-list>
+            <ng-template #addButton>
+                <button mat-raised-button class="addButton" routerLink="../add-restaurant">Add a new Restaurant</button>
+            </ng-template>
+        </div>
+        <div class="col-auto">
+            <app-restaurant-list></app-restaurant-list>
+        </div>
+    </div>
+
+    <!--<div class="row">
+        <div class="col-auto" display="inline">
+            <p>Hello</p>
+        </div>
+        <div class="col-auto" display="inline">
+            <p>World</p>
+        </div>
+    </div>-->
+
 </div>

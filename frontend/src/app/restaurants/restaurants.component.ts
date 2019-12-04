@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from './restaurant.service';
 import { Restaurant } from './restaurant.model';
 import { Review } from './restaurant-reviews-list/reviews/review.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurants',
@@ -13,7 +14,8 @@ export class RestaurantsComponent implements OnInit {
 
   selectedRestaurant: Restaurant;
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private restaurantService: RestaurantService, private router: Router) {
+   }
 
   ngOnInit() {
     this.restaurantService.restaurantSelected.subscribe(

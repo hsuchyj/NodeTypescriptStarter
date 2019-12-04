@@ -21,4 +21,8 @@ export class RestaurantItemComponent implements OnInit {
     this.restaurantService.restaurantSelected.emit(this.restaurant);
   }
 
+  onReviewsButton() {
+    window.scrollTo(0, 0);
+  }
+
 }

@@ -32,6 +32,7 @@ import {
 
 import { NewReviewComponent } from './restaurants/restaurant-reviews-list/new-review/new-review.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
+import { SearchPipe } from './search.pipe.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
     LoginComponent,
     RegisterComponent,
     NewReviewComponent,
-    AddRestaurantComponent
+    AddRestaurantComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
