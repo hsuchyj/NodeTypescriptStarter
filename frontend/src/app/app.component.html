@@ -22,8 +22,12 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img width="40" alt="Angular Logo" src="../Icon.png" />
-  <span>Welcome</span>
+  <div>
+    <a [routerLinkActive]="activeClass" class="nav-link" routerLink="home"
+    style="color: white;">
+      <h2>UDelp</h2>
+    </a>
+  </div>
   <div class="spacer"></div>
   <span>
     <app-menu activeClass='bg-dark active' id="menu"></app-menu>
