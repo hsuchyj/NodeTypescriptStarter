@@ -49,6 +49,7 @@ export class NewReviewComponent implements OnInit {
 
     this.reviewForm.reset();
     this.newReview = !this.newReview;
+    window.location.reload(false);
   }
 
   onNewReview() {
