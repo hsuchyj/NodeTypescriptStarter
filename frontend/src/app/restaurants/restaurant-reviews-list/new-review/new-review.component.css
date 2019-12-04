@@ -1,0 +1,16 @@
+.container-fluid {
+    margin-left: 10px;
+}
+
+input {
+    width: 100px;
+}
+
+button {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#text {
+    min-width: 300px;
+}
