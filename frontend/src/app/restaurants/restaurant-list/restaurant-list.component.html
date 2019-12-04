@@ -3,18 +3,20 @@
   <!-- Bootstrap Reference -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
+  <div class="active-cyan-3 active-cyan-4 mb-4">
+      <input [(ngModel)]="query" class="form-control" type="text" placeholder="Whatcha lookin' for?" aria-label="Search">
+    </div>
   <div class="row">
-    <div class="col-sm-4">
-      <app-restaurant-item *ngFor="let restaurantEl of leftColumn;" [restaurant]="restaurantEl"
-      <input [(ngModel)]="query" placeholder="Whatcha lookin' for?">
+    <div class="col-xs-auto">
+      <app-restaurant-item *ngFor="let restaurantEl of leftColumn | search:'name':query" [restaurant]="restaurantEl"
         [index]="restaurantEl.alias"></app-restaurant-item>
     </div>
-    <div class="col-sm-4">
-      <app-restaurant-item *ngFor="let restaurantEl of centerColumn;" [restaurant]="restaurantEl"
+    <div class="col-xs-auto">
+      <app-restaurant-item *ngFor="let restaurantEl of centerColumn | search:'name':query" [restaurant]="restaurantEl"
         [index]="restaurantEl.alias"></app-restaurant-item>
     </div>
-    <div class="col-sm-4">
-      <app-restaurant-item *ngFor="let restaurantEl of rightColumn;" [restaurant]="restaurantEl"
+    <div class="col-xs-auto">
+      <app-restaurant-item *ngFor="let restaurantEl of rightColumn | search:'name':query" [restaurant]="restaurantEl"
         [index]="restaurantEl.alias"></app-restaurant-item>
     </div>
   </div>
