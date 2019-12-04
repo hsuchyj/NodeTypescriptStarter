@@ -2,3 +2,7 @@
     background-color: #1976d2;
     color: white;
 }
+
+.col-md-8 {
+    background-size: cover;
+}
