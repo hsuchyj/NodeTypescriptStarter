@@ -28,8 +28,16 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
   <div class="row">
-    <div class="col-md-12">
-      <app-restaurant-item *ngFor="let restaurantEl of restaurants;" [restaurant]="restaurantEl"
+    <div class="col-sm-4">
+      <app-restaurant-item *ngFor="let restaurantEl of leftColumn;" [restaurant]="restaurantEl"
+        [index]="restaurantEl.alias"></app-restaurant-item>
+    </div>
+    <div class="col-sm-4">
+      <app-restaurant-item *ngFor="let restaurantEl of centerColumn;" [restaurant]="restaurantEl"
+        [index]="restaurantEl.alias"></app-restaurant-item>
+    </div>
+    <div class="col-sm-4">
+      <app-restaurant-item *ngFor="let restaurantEl of rightColumn;" [restaurant]="restaurantEl"
         [index]="restaurantEl.alias"></app-restaurant-item>
     </div>
   </div>
