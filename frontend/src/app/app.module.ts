@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './error.interceptor';
+import { NewReviewComponent } from './restaurants/restaurant-reviews-list/new-review/new-review.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { ErrorInterceptor } from './error.interceptor';
     ReviewsComponent,
     RestaurantReviewsListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewReviewComponent
   ],
   imports: [
     BrowserModule,

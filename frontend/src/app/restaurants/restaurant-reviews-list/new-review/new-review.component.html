@@ -1,0 +1,84 @@
+<button class="btn btn-success" (click)="onNewReview()" *ngIf="!newReview">
+    Submit a Review!
+</button>
+<div class="container-fluid" *ngIf="newReview" >
+  <div class="row">
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="text" style="font-weight: bold;">Your review:</label>
+            <textarea id="text" class="form-control" rows="3" formControlName="text"></textarea>
+            <hr />
+            <div>
+              <label for="ratings" style="font-weight: bold;"
+                >Your ratings:</label
+              >
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="overall">Overall: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="overall"/>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="food">Food: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="food"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="drinksAndBar">Drinks and Bar: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="drinksAndBar"/>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="price">Price: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="price"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="service">Service: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="service"/>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="specialsAndHappyHour"
+                      >Specials/Happy Hour:
+                    </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="specialsAndHappyHour"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <label for="music">Music: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="music"/>
+                  </div>
+                  <div class="col-xs-6">
+                    <label for="restrooms">Restrooms: </label>
+                    <input type="number" class="form-control" min="1" max="5" formControlName="restrooms"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-success" [disabled]="!reviewForm.valid">Post</button>
+          <button type="button" class="btn btn-danger" (click)="onNewReview()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

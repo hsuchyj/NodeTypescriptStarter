@@ -20,7 +20,7 @@ const routes: Routes = [
     component: RestaurantsComponent,
     resolve: { restaurants: RestaurantResolver, reviews: ReviewsResolver },
     children: [
-    { path: ':id', component: RestaurantReviewsListComponent }
+    { path: ':id', component: RestaurantReviewsListComponent },
   ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent}

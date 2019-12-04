@@ -1,5 +1,11 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col">
+    <app-new-review [restaurantId]="restaurant._id"></app-new-review>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col">
     <app-reviews *ngFor="let review of reviews" [review]="review"></app-reviews>
   </div>
 </div>
