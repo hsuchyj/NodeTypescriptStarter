@@ -1,7 +1,12 @@
 body {
-    background: url('../../../udelp.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-  }
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background: url('../../../udelp.jpg') no-repeat center center fixed;
+}
+
+.img-responsive {
+  margin-top: -25px;
+  background-size: cover;
+}
