@@ -48,7 +48,7 @@
             <app-restaurant-reviews-list *ngIf="selectedRestaurant; else addButton" [restaurant]="selectedRestaurant"
                 [reviews]="getReviews()"></app-restaurant-reviews-list>
             <ng-template #addButton>
-                <button mat-raised-button class="addButton" routerLink='/addRestaurant'>Add a new Restaurant</button>
+                <button mat-raised-button class="addButton" routerLink="../add-restaurant">Add a new Restaurant</button>
             </ng-template>
         </div>
         <div class="col-auto">
